@@ -65,11 +65,18 @@ ssl_context.verify_mode = ssl.CERT_NONE
 
 from bs4 import BeautifulSoup
 
+# google
+from google import genai
+from google.genai import types
+
+# win32/OCR
+import pytesseract
 if (os.name == 'nt'):
     from io import StringIO
     import win32clipboard
     import comtypes.client
     import comtypes.stream
+    import winocr
 
 # seleniumモジュールのインポート
 from selenium import webdriver
@@ -90,11 +97,6 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
-
-# OCR
-import pytesseract
-if (os.name == 'nt'):
-    import winocr
 
 # パス設定
 qPath_base = os.path.dirname(sys.argv[0]) + '/'
