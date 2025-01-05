@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # ------------------------------------------------
-# COPYRIGHT (C) 2014-2024 Mitsuo KONDOU.
+# COPYRIGHT (C) 2014-2025 Mitsuo KONDOU.
 # This software is released under the not MIT License.
 # Permission from the right holder is required for use.
 # https://github.com/ClipnGPT
@@ -37,7 +37,7 @@ class _class:
             "name": self.func_name,
             "description": \
 """
-勤怠システムを検索し、社員の出退勤情報を取得する。
+社内システムの勤退情報を検索し、社員の出退勤情報を取得する。
 神戸や姫路への全出勤者の状況を検索する場合は、名前をallで呼び出す。
 個人の出勤状況を検索する場合は、名前を指定して呼び出す。
 名前の指定の場合、以下の名前は、一度ひらがなに戻して正しい漢字で、検索してください。
