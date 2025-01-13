@@ -41,15 +41,16 @@ class _class:
             "name": self.func_name,
             "description": \
 """
-社内システム(WEB)のログイン,出勤,退勤の操作を実行する。
-この機能から、自律的にブラウザ操作が可能なAIエージェント 波乗/Surfer(サーファー: webBrowser_operation_agent ) に操作指示して実行する。
+この機能は、社内システム(WEB) 出退勤,日報,掲示板 の操作専用の機能です。
+ログイン,出勤,退勤の操作が実行できます。
+この機能から、自律的にブラウザ操作が可能なAIエージェント WebAgent(ウェブエージェント: webBrowser_operation_agent ) に操作指示して実行します。
 """,
             "parameters": {
                 "type": "object",
                 "properties": {
                     "system_name": {
                             "type": "string",
-                            "description": "社内システムの名前 日報,掲示板または勤退 (例) 日報"
+                            "description": "社内システムの名前 出退勤,日報または掲示板 (例) 日報"
                     },
                     "operation": {
                             "type": "string",
@@ -90,7 +91,7 @@ class _class:
             req_text += f"ログインIDは'95'です。パスワードは'95secret'です。\n"
             req_text += f"ホワイトボード画面が出たら操作は停止してください。\n"
 
-        if (system_name == '勤退') and (operation == 'ログイン'):
+        if (system_name == '出退勤') and (operation == 'ログイン'):
             req_text += f"社内システム({ system_name })の{ operation }操作を実行してください。\n"
             req_text += f"URLは、'https://azipdevweb.azurewebsites.net/azipsyanaisystem/index.aspx'にアクセスしてください。\n"
             req_text += f"ログインIDは'95'です。パスワードは'95secret'です。\n"
@@ -105,7 +106,8 @@ class _class:
             res = io_text_write(filename=qIO_func2py, text=req_dump, )
             if (res == True):
                 res_okng = 'ok'
-                res_msg  = f"AIエージェント 波乗/Surfer(サーファー) に、社内システム({ system_name })の{ operation }操作を依頼しました。" 
+                res_msg  = f"AIエージェント WebAgent(ウェブエージェント) に、社内システム({ system_name })の{ operation }操作を依頼しました。\n" 
+                res_msg += 'しばらくお待ちください。\n'
 
         # JSON化
         dic = {}
