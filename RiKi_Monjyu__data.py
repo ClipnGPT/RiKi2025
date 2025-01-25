@@ -202,9 +202,13 @@ class _data_class:
         # OpenRouterの設定
         self.ort_setting = {
             "ort_a_model": "", 
+            "ort_a_use_tools": "", 
             "ort_b_model": "", 
+            "ort_b_use_tools": "", 
             "ort_v_model": "",
-            "ort_x_model": ""
+            "ort_v_use_tools": "", 
+            "ort_x_model": "",
+            "ort_x_use_tools": "" 
         }
 
         # liveの設定

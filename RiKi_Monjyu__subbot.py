@@ -469,9 +469,13 @@ class ChatClass:
                             openrt_key.getkey('openrt','openrt_max_step'), openrt_key.getkey('openrt','openrt_max_session'),
                             key_id,
                             openrt_key.getkey('openrt','openrt_a_nick_name'), openrt_key.getkey('openrt','openrt_a_model'), openrt_key.getkey('openrt','openrt_a_token'),
+                            openrt_key.getkey('openrt','openrt_a_use_tools'),
                             openrt_key.getkey('openrt','openrt_b_nick_name'), openrt_key.getkey('openrt','openrt_b_model'), openrt_key.getkey('openrt','openrt_b_token'),
+                            openrt_key.getkey('openrt','openrt_b_use_tools'),
                             openrt_key.getkey('openrt','openrt_v_nick_name'), openrt_key.getkey('openrt','openrt_v_model'), openrt_key.getkey('openrt','openrt_v_token'),
+                            openrt_key.getkey('openrt','openrt_v_use_tools'),
                             openrt_key.getkey('openrt','openrt_x_nick_name'), openrt_key.getkey('openrt','openrt_x_model'), openrt_key.getkey('openrt','openrt_x_token'),
+                            openrt_key.getkey('openrt','openrt_x_use_tools'),
                             )
 
         if res == True:
@@ -1190,9 +1194,13 @@ class ChatClass:
 
                     if (self.data is not None):
                         self.openrtAPI.set_models(  a_model=self.data.ort_setting['ort_a_model'],
+                                                    a_use_tools=self.data.ort_setting['ort_a_use_tools'],
                                                     b_model=self.data.ort_setting['ort_b_model'],
+                                                    b_use_tools=self.data.ort_setting['ort_b_use_tools'],
                                                     v_model=self.data.ort_setting['ort_v_model'],
-                                                    x_model=self.data.ort_setting['ort_x_model'], )
+                                                    v_use_tools=self.data.ort_setting['ort_v_use_tools'],
+                                                    x_model=self.data.ort_setting['ort_x_model'],
+                                                    x_use_tools=self.data.ort_setting['ort_x_use_tools'], )
 
                     res_text, res_path, res_files, nick_name, model_name, res_history = \
                         self.openrtAPI.chatBot(     chat_class=chat_class, model_select=model_select, session_id=session_id, 

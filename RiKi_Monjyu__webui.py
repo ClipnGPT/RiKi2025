@@ -97,9 +97,13 @@ class postAddinsDataModel(BaseModel):
 # OpenRouter設定データモデル
 class postOpenRouterDataModel(BaseModel):
     ort_a_model: str
+    ort_a_use_tools: str
     ort_b_model: str
+    ort_b_use_tools: str
     ort_v_model: str
+    ort_v_use_tools: str
     ort_x_model: str
+    ort_x_use_tools: str
 
 # Live設定データモデル
 class postLiveDataModel(BaseModel):
@@ -342,14 +346,22 @@ class WebUiClass:
     async def post_ort_setting(self, data: postOpenRouterDataModel):
         # 設定情報を更新する
         ort_a_model = str(data.ort_a_model) if data.ort_a_model else ""
+        ort_a_use_tools = str(data.ort_a_use_tools) if data.ort_a_use_tools else ""
         ort_b_model = str(data.ort_b_model) if data.ort_b_model else ""
+        ort_b_use_tools = str(data.ort_b_use_tools) if data.ort_b_use_tools else ""
         ort_v_model = str(data.ort_v_model) if data.ort_v_model else ""
+        ort_v_use_tools = str(data.ort_v_use_tools) if data.ort_v_use_tools else ""
         ort_x_model = str(data.ort_x_model) if data.ort_x_model else ""
+        ort_x_use_tools = str(data.ort_x_use_tools) if data.ort_x_use_tools else ""
         if (self.data is not None):
             self.data.ort_setting = {   "ort_a_model": ort_a_model,
+                                        "ort_a_use_tools": ort_a_use_tools,
                                         "ort_b_model": ort_b_model,
+                                        "ort_b_use_tools": ort_b_use_tools,
                                         "ort_v_model": ort_v_model,
-                                        "ort_x_model": ort_x_model, }
+                                        "ort_v_use_tools": ort_v_use_tools,
+                                        "ort_x_model": ort_x_model,
+                                        "ort_x_use_tools": ort_x_use_tools, }
         return JSONResponse(content={'message': 'post_ort_setting successfully'})
 
     async def get_live_voices(self, req_mode: str) -> Dict[str, str]:
