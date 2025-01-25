@@ -37,6 +37,8 @@ def getkey(api, key):
             return 'your openrt (a) model'
         if (key == 'openrt_a_token'):
             return 'your openrt (a) token'
+        if (key == 'openrt_a_use_tools'):
+            return 'your openrt (a) use tools'
 
         if (key == 'openrt_b_nick_name'):
             return 'your openrt (b) nick name'
@@ -44,6 +46,8 @@ def getkey(api, key):
             return 'your openrt (b) model'
         if (key == 'openrt_b_token'):
             return 'your openrt (b) token'
+        if (key == 'openrt_b_use_tools'):
+            return 'your openrt (b) use tools'
 
         if (key == 'openrt_v_nick_name'):
             return 'your openrt (v) nick name'
@@ -51,6 +55,8 @@ def getkey(api, key):
             return 'your openrt (v) model'
         if (key == 'openrt_v_token'):
             return 'your openrt (v) token'
+        if (key == 'openrt_v_use_tools'):
+            return 'your openrt (v) use tools'
 
         if (key == 'openrt_x_nick_name'):
             return 'your openrt (x) nick name'
@@ -58,6 +64,8 @@ def getkey(api, key):
             return 'your openrt (x) model'
         if (key == 'openrt_x_token'):
             return 'your openrt (x) token'
+        if (key == 'openrt_x_use_tools'):
+            return 'your openrt (x) use tools'
 
     return False
 
