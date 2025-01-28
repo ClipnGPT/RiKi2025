@@ -27,6 +27,8 @@ def getkey(api, key):
             return 'chat max step'
         if (key == 'openrt_max_session'):
             return 'use max session'
+        if (key == 'openrt_max_wait_sec'):
+            return 'chat max wait(sec)'
 
         if (key == 'openrt_key_id'):
             return 'your openrt key'
