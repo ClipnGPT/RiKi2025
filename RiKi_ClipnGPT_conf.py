@@ -64,12 +64,9 @@ class _conf:
             self.azure_endpoint                 = '< your azure endpoint base >' 
             self.azure_version                  = 'yyyy-mm-dd'
             self.azure_key_id                   = '< your azure key >'
-            self.claude_key_id                  = '< your claude key >'
-            self.gemini_key_id                  = '< your gemini key >'
-            self.perplexity_key_id              = '< your perplexity key >'
+            self.freeai_key_id                  = '< your freeai key >'
             self.ollama_server                  = 'auto'
             self.ollama_port                    = 'auto'
-            self.freeai_key_id                  = '< your freeai key >'
 
             self.openai_nick_name               = ''
             self.openai_model                   = ''
@@ -79,29 +76,13 @@ class _conf:
             self.openai_inpLang                 = 'ja-JP'
             self.openai_outLang                 = 'ja-JP'
 
-            self.claude_nick_name               = ''
-            self.claude_model                   = ''
-            self.claude_token                   = ''
-            self.claude_temperature             = '0.5'
-            self.claude_max_step                = '10'
-            self.claude_inpLang                 = 'ja-JP'
-            self.claude_outLang                 = 'ja-JP'
-
-            self.gemini_nick_name               = ''
-            self.gemini_model                   = ''
-            self.gemini_token                   = ''
-            self.gemini_temperature             = '0.5'
-            self.gemini_max_step                = '10'
-            self.gemini_inpLang                 = 'ja-JP'
-            self.gemini_outLang                 = 'ja-JP'
-
-            self.perplexity_nick_name           = ''
-            self.perplexity_model               = ''
-            self.perplexity_token               = ''
-            self.perplexity_temperature         = '0.5'
-            self.perplexity_max_step            = '10'
-            self.perplexity_inpLang             = 'ja-JP'
-            self.perplexity_outLang             = 'ja-JP'
+            self.freeai_nick_name               = ''
+            self.freeai_model                   = ''
+            self.freeai_token                   = ''
+            self.freeai_temperature             = '0.5'
+            self.freeai_max_step                = '10'
+            self.freeai_inpLang                 = 'ja-JP'
+            self.freeai_outLang                 = 'ja-JP'
 
             self.ollama_nick_name               = ''
             self.ollama_model                   = ''
@@ -110,14 +91,6 @@ class _conf:
             self.ollama_max_step                = '10'
             self.ollama_inpLang                 = 'ja-JP'
             self.ollama_outLang                 = 'ja-JP'
-
-            self.freeai_nick_name               = ''
-            self.freeai_model                   = ''
-            self.freeai_token                   = ''
-            self.freeai_temperature             = '0.5'
-            self.freeai_max_step                = '10'
-            self.freeai_inpLang                 = 'ja-JP'
-            self.freeai_outLang                 = 'ja-JP'
 
             self.restui_start                   = 'auto'
             self.restui_local_ip                = '0.0.0.0'
@@ -209,12 +182,9 @@ class _conf:
             dic['azure_endpoint']               = self.azure_endpoint
             dic['azure_version']                = self.azure_version
             dic['azure_key_id']                 = self.azure_key_id
-            dic['claude_key_id']                = self.claude_key_id
-            dic['gemini_key_id']                = self.gemini_key_id
-            dic['perplexity_key_id']            = self.perplexity_key_id
+            dic['freeai_key_id']                = self.freeai_key_id
             dic['ollama_server']                = self.ollama_server
             dic['ollama_port']                  = self.ollama_port
-            dic['freeai_key_id']                = self.freeai_key_id
 
             dic['openai_nick_name']             = self.openai_nick_name
             dic['openai_model']                 = self.openai_model
@@ -224,29 +194,13 @@ class _conf:
             dic['openai_inpLang']               = self.openai_inpLang
             dic['openai_outLang']               = self.openai_outLang
 
-            dic['claude_nick_name']             = self.claude_nick_name
-            dic['claude_model']                 = self.claude_model
-            dic['claude_token']                 = self.claude_token
-            dic['claude_temperature']           = self.claude_temperature
-            dic['claude_max_step']              = self.claude_max_step
-            dic['claude_inpLang']               = self.claude_inpLang
-            dic['claude_outLang']               = self.claude_outLang
-
-            dic['gemini_nick_name']             = self.gemini_nick_name
-            dic['gemini_model']                 = self.gemini_model
-            dic['gemini_token']                 = self.gemini_token
-            dic['gemini_temperature']           = self.gemini_temperature
-            dic['gemini_max_step']              = self.gemini_max_step
-            dic['gemini_inpLang']               = self.gemini_inpLang
-            dic['gemini_outLang']               = self.gemini_outLang
-
-            dic['perplexity_nick_name']         = self.perplexity_nick_name
-            dic['perplexity_model']             = self.perplexity_model
-            dic['perplexity_token']             = self.perplexity_token
-            dic['perplexity_temperature']       = self.perplexity_temperature
-            dic['perplexity_max_step']          = self.perplexity_max_step
-            dic['perplexity_inpLang']           = self.perplexity_inpLang
-            dic['perplexity_outLang']           = self.perplexity_outLang
+            dic['freeai_nick_name']             = self.freeai_nick_name
+            dic['freeai_model']                 = self.freeai_model
+            dic['freeai_token']                 = self.freeai_token
+            dic['freeai_temperature']           = self.freeai_temperature
+            dic['freeai_max_step']              = self.freeai_max_step
+            dic['freeai_inpLang']               = self.freeai_inpLang
+            dic['freeai_outLang']               = self.freeai_outLang
 
             dic['ollama_nick_name']             = self.ollama_nick_name
             dic['ollama_model']                 = self.ollama_model
@@ -255,14 +209,6 @@ class _conf:
             dic['ollama_max_step']              = self.ollama_max_step
             dic['ollama_inpLang']               = self.ollama_inpLang
             dic['ollama_outLang']               = self.ollama_outLang
-
-            dic['freeai_nick_name']             = self.freeai_nick_name
-            dic['freeai_model']                 = self.freeai_model
-            dic['freeai_token']                 = self.freeai_token
-            dic['freeai_temperature']           = self.freeai_temperature
-            dic['freeai_max_step']              = self.freeai_max_step
-            dic['freeai_inpLang']               = self.freeai_inpLang
-            dic['freeai_outLang']               = self.freeai_outLang
 
             dic['restui_start']                 = self.restui_start
             dic['restui_local_ip']              = self.restui_local_ip
@@ -335,12 +281,9 @@ class _conf:
             self.azure_endpoint                 = dic['azure_endpoint']
             self.azure_version                  = dic['azure_version']
             self.azure_key_id                   = dic['azure_key_id']
-            self.claude_key_id                  = dic['claude_key_id']
-            self.gemini_key_id                  = dic['gemini_key_id']
-            self.perplexity_key_id              = dic['perplexity_key_id']
+            self.freeai_key_id                  = dic['freeai_key_id']
             self.ollama_server                  = dic['ollama_server']
             self.ollama_port                    = dic['ollama_port']
-            self.freeai_key_id                  = dic['freeai_key_id']
 
             self.openai_nick_name               = dic['openai_nick_name']
             self.openai_model                   = dic['openai_model']
@@ -350,29 +293,13 @@ class _conf:
             self.openai_inpLang                 = dic['openai_inpLang']
             self.openai_outLang                 = dic['openai_outLang']
 
-            self.claude_nick_name               = dic['claude_nick_name']
-            self.claude_model                   = dic['claude_model']
-            self.claude_token                   = dic['claude_token']
-            self.claude_temperature             = dic['claude_temperature']
-            self.claude_max_step                = dic['claude_max_step']
-            self.claude_inpLang                 = dic['claude_inpLang']
-            self.claude_outLang                 = dic['claude_outLang']
-
-            self.gemini_nick_name               = dic['gemini_nick_name']
-            self.gemini_model                   = dic['gemini_model']
-            self.gemini_token                   = dic['gemini_token']
-            self.gemini_temperature             = dic['gemini_temperature']
-            self.gemini_max_step                = dic['gemini_max_step']
-            self.gemini_inpLang                 = dic['gemini_inpLang']
-            self.gemini_outLang                 = dic['gemini_outLang']
-
-            self.perplexity_nick_name           = dic['perplexity_nick_name']
-            self.perplexity_model               = dic['perplexity_model']
-            self.perplexity_token               = dic['perplexity_token']
-            self.perplexity_temperature         = dic['perplexity_temperature']
-            self.perplexity_max_step            = dic['perplexity_max_step']
-            self.perplexity_inpLang             = dic['perplexity_inpLang']
-            self.perplexity_outLang             = dic['perplexity_outLang']
+            self.freeai_nick_name               = dic['freeai_nick_name']
+            self.freeai_model                   = dic['freeai_model']
+            self.freeai_token                   = dic['freeai_token']
+            self.freeai_temperature             = dic['freeai_temperature']
+            self.freeai_max_step                = dic['freeai_max_step']
+            self.freeai_inpLang                 = dic['freeai_inpLang']
+            self.freeai_outLang                 = dic['freeai_outLang']
 
             self.ollama_nick_name               = dic['ollama_nick_name']
             self.ollama_model                   = dic['ollama_model']
@@ -381,14 +308,6 @@ class _conf:
             self.ollama_max_step                = dic['ollama_max_step']
             self.ollama_inpLang                 = dic['ollama_inpLang']
             self.ollama_outLang                 = dic['ollama_outLang']
-
-            self.freeai_nick_name               = dic['freeai_nick_name']
-            self.freeai_model                   = dic['freeai_model']
-            self.freeai_token                   = dic['freeai_token']
-            self.freeai_temperature             = dic['freeai_temperature']
-            self.freeai_max_step                = dic['freeai_max_step']
-            self.freeai_inpLang                 = dic['freeai_inpLang']
-            self.freeai_outLang                 = dic['freeai_outLang']
 
             self.restui_start                   = dic['restui_start']
             self.restui_local_ip                = dic['restui_local_ip']

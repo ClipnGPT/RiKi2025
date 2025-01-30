@@ -181,6 +181,7 @@ class ChatClass:
                             perplexity_key.getkey('perplexity','perplexity_default_gpt'), perplexity_key.getkey('perplexity','perplexity_default_class'),
                             perplexity_key.getkey('perplexity','perplexity_auto_continue'),
                             perplexity_key.getkey('perplexity','perplexity_max_step'), perplexity_key.getkey('perplexity','perplexity_max_session'),
+                            perplexity_key.getkey('perplexity','perplexity_max_wait_sec'),
                             key_id,
                             perplexity_key.getkey('perplexity','perplexity_a_nick_name'), perplexity_key.getkey('perplexity','perplexity_a_model'), perplexity_key.getkey('perplexity','perplexity_a_token'),
                             perplexity_key.getkey('perplexity','perplexity_a_use_tools'),

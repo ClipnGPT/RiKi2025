@@ -12,7 +12,7 @@
 import json
 
 # 指令文字列
-check_header_list = '["riki","assistant","vision","openai","claude","gemini","perplexity","pplx","local","free",]'
+check_header_list = '["riki","assistant","vision","openai","freeai","free","local",]'
 check_inner_list  = '["???","？？？","!!!","！！！",]'
 
 class _class:
@@ -63,66 +63,36 @@ class _class:
         runMode                 = ''
         original_text           = ''
         openai_nick_name        = ''
-        claude_nick_name        = ''
-        gemini_nick_name        = ''
-        perplexity_nick_name    = ''
         freeai_nick_name        = ''
         gpt_a_nick_name         = ''
         gpt_b_nick_name         = ''
         gpt_v_nick_name         = ''
         gpt_x_nick_name         = ''
-        claude_a_nick_name      = ''
-        claude_b_nick_name      = ''
-        claude_v_nick_name      = ''
-        claude_x_nick_name      = ''
-        gemini_a_nick_name      = ''
-        gemini_b_nick_name      = ''
-        gemini_v_nick_name      = ''
-        gemini_x_nick_name      = ''
-        perplexity_a_nick_name  = ''
-        perplexity_b_nick_name  = ''
-        perplexity_v_nick_name  = ''
-        perplexity_x_nick_name  = ''
-        ollama_a_nick_name      = ''
-        ollama_b_nick_name      = ''
-        ollama_v_nick_name      = ''
-        ollama_x_nick_name      = ''
         freeai_a_nick_name      = ''
         freeai_b_nick_name      = ''
         freeai_v_nick_name      = ''
         freeai_x_nick_name      = ''
+        ollama_a_nick_name      = ''
+        ollama_b_nick_name      = ''
+        ollama_v_nick_name      = ''
+        ollama_x_nick_name      = ''
         if (json_kwargs is not None):
             args_dic = json.loads(json_kwargs)
             runMode                 = args_dic.get('runMode', '')
             original_text           = args_dic.get('original_text', '')
             openai_nick_name        = args_dic.get('openai_nick_name', '')
-            claude_nick_name        = args_dic.get('claude_nick_name', '')
-            gemini_nick_name        = args_dic.get('gemini_nick_name', '')
-            perplexity_nick_name    = args_dic.get('perplexity_nick_name', '')
             gpt_a_nick_name         = args_dic.get('gpt_a_nick_name', '')
             gpt_b_nick_name         = args_dic.get('gpt_b_nick_name', '')
             gpt_v_nick_name         = args_dic.get('gpt_v_nick_name', '')
             gpt_x_nick_name         = args_dic.get('gpt_x_nick_name', '')
-            claude_a_nick_name      = args_dic.get('claude_a_nick_name', '')
-            claude_b_nick_name      = args_dic.get('claude_b_nick_name', '')
-            claude_v_nick_name      = args_dic.get('claude_v_nick_name', '')
-            claude_x_nick_name      = args_dic.get('claude_x_nick_name', '')
-            gemini_a_nick_name      = args_dic.get('gemini_a_nick_name', '')
-            gemini_b_nick_name      = args_dic.get('gemini_b_nick_name', '')
-            gemini_v_nick_name      = args_dic.get('gemini_v_nick_name', '')
-            gemini_x_nick_name      = args_dic.get('gemini_x_nick_name', '')
-            perplexity_a_nick_name  = args_dic.get('perplexity_a_nick_name', '')
-            perplexity_b_nick_name  = args_dic.get('perplexity_b_nick_name', '')
-            perplexity_v_nick_name  = args_dic.get('perplexity_v_nick_name', '')
-            perplexity_x_nick_name  = args_dic.get('perplexity_x_nick_name', '')
-            ollama_a_nick_name      = args_dic.get('ollama_a_nick_name', '')
-            ollama_b_nick_name      = args_dic.get('ollama_b_nick_name', '')
-            ollama_v_nick_name      = args_dic.get('ollama_v_nick_name', '')
-            ollama_x_nick_name      = args_dic.get('ollama_x_nick_name', '')
             freeai_a_nick_name      = args_dic.get('freeai_a_nick_name', '')
             freeai_b_nick_name      = args_dic.get('freeai_b_nick_name', '')
             freeai_v_nick_name      = args_dic.get('freeai_v_nick_name', '')
             freeai_x_nick_name      = args_dic.get('freeai_x_nick_name', '')
+            ollama_a_nick_name      = args_dic.get('ollama_a_nick_name', '')
+            ollama_b_nick_name      = args_dic.get('ollama_b_nick_name', '')
+            ollama_v_nick_name      = args_dic.get('ollama_v_nick_name', '')
+            ollama_x_nick_name      = args_dic.get('ollama_x_nick_name', '')
 
         if (runMode == ''):
             runMode = self.runMode
@@ -154,18 +124,6 @@ class _class:
                     nm = openai_nick_name + ','
                     if (text[:len(str(nm))].lower() == str(nm).lower()):
                         res_text = text[len(str(nm)):]
-                if (claude_nick_name != ''):
-                    nm = claude_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        res_text = text[len(str(nm)):]
-                if (gemini_nick_name != ''):
-                    nm = gemini_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        res_text = text[len(str(nm)):]
-                if (perplexity_nick_name != ''):
-                    nm = perplexity_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        res_text = text[len(str(nm)):]
                 if (freeai_nick_name != ''):
                     nm = freeai_nick_name + ','
                     if (text[:len(str(nm))].lower() == str(nm).lower()):
@@ -192,65 +150,23 @@ class _class:
                         #res_text = text[len(str(nm)):]
                         res_text = original_text
 
-                if (claude_a_nick_name != ''):
-                    nm = claude_a_nick_name + ','
+                if (freeai_a_nick_name != ''):
+                    nm = freeai_a_nick_name + ','
                     if (text[:len(str(nm))].lower() == str(nm).lower()):
                         #res_text = text[len(str(nm)):]
                         res_text = original_text
-                if (claude_b_nick_name != ''):
-                    nm = claude_b_nick_name + ','
+                if (freeai_b_nick_name != ''):
+                    nm = freeai_b_nick_name + ','
                     if (text[:len(str(nm))].lower() == str(nm).lower()):
                         #res_text = text[len(str(nm)):]
                         res_text = original_text
-                if (claude_v_nick_name != ''):
-                    nm = claude_v_nick_name + ','
+                if (freeai_v_nick_name != ''):
+                    nm = freeai_v_nick_name + ','
                     if (text[:len(str(nm))].lower() == str(nm).lower()):
                         #res_text = text[len(str(nm)):]
                         res_text = original_text
-                if (claude_x_nick_name != ''):
-                    nm = claude_x_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-
-                if (gemini_a_nick_name != ''):
-                    nm = gemini_a_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-                if (gemini_b_nick_name != ''):
-                    nm = gemini_b_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-                if (gemini_v_nick_name != ''):
-                    nm = gemini_v_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-                if (gemini_x_nick_name != ''):
-                    nm = gemini_x_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-
-                if (perplexity_a_nick_name != ''):
-                    nm = perplexity_a_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-                if (perplexity_b_nick_name != ''):
-                    nm = perplexity_b_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-                if (perplexity_v_nick_name != ''):
-                    nm = perplexity_v_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-                if (perplexity_x_nick_name != ''):
-                    nm = perplexity_x_nick_name + ','
+                if (freeai_x_nick_name != ''):
+                    nm = freeai_x_nick_name + ','
                     if (text[:len(str(nm))].lower() == str(nm).lower()):
                         #res_text = text[len(str(nm)):]
                         res_text = original_text
@@ -272,27 +188,6 @@ class _class:
                         res_text = original_text
                 if (ollama_x_nick_name != ''):
                     nm = ollama_x_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-
-                if (freeai_a_nick_name != ''):
-                    nm = freeai_a_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-                if (freeai_b_nick_name != ''):
-                    nm = freeai_b_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-                if (freeai_v_nick_name != ''):
-                    nm = freeai_v_nick_name + ','
-                    if (text[:len(str(nm))].lower() == str(nm).lower()):
-                        #res_text = text[len(str(nm)):]
-                        res_text = original_text
-                if (freeai_x_nick_name != ''):
-                    nm = freeai_x_nick_name + ','
                     if (text[:len(str(nm))].lower() == str(nm).lower()):
                         #res_text = text[len(str(nm)):]
                         res_text = original_text

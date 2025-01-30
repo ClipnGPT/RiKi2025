@@ -27,6 +27,8 @@ def getkey(api, key):
             return 'chat max step'
         if (key == 'claude_max_session'):
             return 'use max session'
+        if (key == 'claude_max_wait_sec'):
+            return 'chat max wait(sec)'
 
         if (key == 'claude_key_id'):
             return 'your claude key'
@@ -37,6 +39,8 @@ def getkey(api, key):
             return 'your claude (a) model'
         if (key == 'claude_a_token'):
             return 'your claude (a) token'
+        if (key == 'claude_a_use_tools'):
+            return 'your claude (a) use tools'
 
         if (key == 'claude_b_nick_name'):
             return 'your claude (b) nick name'
@@ -44,6 +48,8 @@ def getkey(api, key):
             return 'your claude (b) model'
         if (key == 'claude_b_token'):
             return 'your claude (b) token'
+        if (key == 'claude_b_use_tools'):
+            return 'your claude (b) use tools'
 
         if (key == 'claude_v_nick_name'):
             return 'your claude (v) nick name'
@@ -51,6 +57,8 @@ def getkey(api, key):
             return 'your claude (v) model'
         if (key == 'claude_v_token'):
             return 'your claude (v) token'
+        if (key == 'claude_v_use_tools'):
+            return 'your claude (v) use tools'
 
         if (key == 'claude_x_nick_name'):
             return 'your claude (x) nick name'
@@ -58,6 +66,8 @@ def getkey(api, key):
             return 'your claude (x) model'
         if (key == 'claude_x_token'):
             return 'your claude (x) token'
+        if (key == 'claude_x_use_tools'):
+            return 'your claude (x) use tools'
 
     return False
 

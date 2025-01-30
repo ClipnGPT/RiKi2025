@@ -257,18 +257,6 @@ if __name__ == '__main__':
         and (conf.azure_key_id != ''):
             limit_mode = False
             limit_sec  = 0
-        if  (conf.claude_key_id != '< your claude key >') \
-        and (conf.claude_key_id != ''):
-            limit_mode = False
-            limit_sec  = 0
-        if  (conf.gemini_key_id != '< your gemini key >') \
-        and (conf.gemini_key_id != ''):
-            limit_mode = False
-            limit_sec  = 0
-        if  (conf.perplexity_key_id != '< your perplexity key >') \
-        and (conf.perplexity_key_id != ''):
-            limit_mode = False
-            limit_sec  = 0
         if  (conf.freeai_key_id != '< your freeai key >') \
         and (conf.freeai_key_id != ''):
             limit_mode = False
@@ -286,21 +274,12 @@ if __name__ == '__main__':
             conf.openai_max_step    = int(float(5))
             conf.openai_model       = ''
             conf.openai_token       = ''
-            conf.claude_max_step    = int(float(5))
-            conf.claude_model       = ''
-            conf.claude_token       = ''
-            conf.gemini_max_step    = int(float(5))
-            conf.gemini_model       = ''
-            conf.gemini_token       = ''
-            conf.perplexity_max_step= int(float(5))
-            conf.perplexity_model   = ''
-            conf.perplexity_token   = ''
-            conf.ollama_max_step    = int(float(5))
-            conf.ollama_model       = ''
-            conf.ollama_token       = ''
             conf.freeai_max_step    = int(float(5))
             conf.freeai_model       = ''
             conf.freeai_token       = ''
+            conf.ollama_max_step    = int(float(5))
+            conf.ollama_model       = ''
+            conf.ollama_token       = ''
 
         # addin 初期化
         addin.init(qLog_fn=qLog_fn, runMode=runMode,
@@ -354,16 +333,10 @@ if __name__ == '__main__':
         # ボタン有効化 (リセットは最後に)
         if (bot.openai_enable != True):
             gui.window['_check_openai_'].update(False, visible=False)
-        if (bot.claude_enable != True):
-            gui.window['_check_claude_'].update(False, visible=False)
-        if (bot.gemini_enable != True):
-            gui.window['_check_gemini_'].update(False, visible=False)
-        if (bot.perplexity_enable != True):
-            gui.window['_check_perplexity_'].update(False, visible=False)
-        if (bot.ollama_enable != True):
-            gui.window['_check_ollama_'].update(False, visible=False)
         if (bot.freeai_enable != True):
             gui.window['_check_freeai_'].update(False, visible=False)
+        if (bot.ollama_enable != True):
+            gui.window['_check_ollama_'].update(False, visible=False)
 
         ext_module = addin.addin_modules.get('addin_pdf', None)
         if (ext_module is None):
@@ -929,34 +902,19 @@ if __name__ == '__main__':
                                         dic = {}
                                         dic['original_text']            = text
                                         dic['openai_nick_name']         = conf.openai_nick_name
-                                        dic['claude_nick_name']         = conf.claude_nick_name
-                                        dic['gemini_nick_name']         = conf.gemini_nick_name
-                                        dic['perplexity_nick_name']     = conf.perplexity_nick_name
                                         dic['freeai_nick_name']         = conf.freeai_nick_name
                                         dic['gpt_a_nick_name']          = bot.openaiAPI.gpt_a_nick_name
                                         dic['gpt_b_nick_name']          = bot.openaiAPI.gpt_b_nick_name
                                         dic['gpt_v_nick_name']          = bot.openaiAPI.gpt_v_nick_name
                                         dic['gpt_x_nick_name']          = bot.openaiAPI.gpt_x_nick_name
-                                        dic['claude_a_nick_name']       = bot.claudeAPI.claude_a_nick_name
-                                        dic['claude_b_nick_name']       = bot.claudeAPI.claude_b_nick_name
-                                        dic['claude_v_nick_name']       = bot.claudeAPI.claude_v_nick_name
-                                        dic['claude_x_nick_name']       = bot.claudeAPI.claude_x_nick_name
-                                        dic['gemini_a_nick_name']       = bot.geminiAPI.gemini_a_nick_name
-                                        dic['gemini_b_nick_name']       = bot.geminiAPI.gemini_b_nick_name
-                                        dic['gemini_v_nick_name']       = bot.geminiAPI.gemini_v_nick_name
-                                        dic['gemini_x_nick_name']       = bot.geminiAPI.gemini_x_nick_name
-                                        dic['perplexity_a_nick_name']   = bot.perplexityAPI.perplexity_a_nick_name
-                                        dic['perplexity_b_nick_name']   = bot.perplexityAPI.perplexity_b_nick_name
-                                        dic['perplexity_v_nick_name']   = bot.perplexityAPI.perplexity_v_nick_name
-                                        dic['perplexity_x_nick_name']   = bot.perplexityAPI.perplexity_x_nick_name
-                                        dic['ollama_a_nick_name']       = bot.ollamaAPI.ollama_a_nick_name
-                                        dic['ollama_b_nick_name']       = bot.ollamaAPI.ollama_b_nick_name
-                                        dic['ollama_v_nick_name']       = bot.ollamaAPI.ollama_v_nick_name
-                                        dic['ollama_x_nick_name']       = bot.ollamaAPI.ollama_x_nick_name
                                         dic['freeai_a_nick_name']       = bot.freeaiAPI.freeai_a_nick_name
                                         dic['freeai_b_nick_name']       = bot.freeaiAPI.freeai_b_nick_name
                                         dic['freeai_v_nick_name']       = bot.freeaiAPI.freeai_v_nick_name
                                         dic['freeai_x_nick_name']       = bot.freeaiAPI.freeai_x_nick_name
+                                        dic['ollama_a_nick_name']       = bot.ollamaAPI.ollama_a_nick_name
+                                        dic['ollama_b_nick_name']       = bot.ollamaAPI.ollama_b_nick_name
+                                        dic['ollama_v_nick_name']       = bot.ollamaAPI.ollama_v_nick_name
+                                        dic['ollama_x_nick_name']       = bot.ollamaAPI.ollama_x_nick_name
                                         json_dump = json.dumps(dic, ensure_ascii=False, )
 
                                         #func_proc = ext_module['func_proc']
@@ -1390,26 +1348,12 @@ if __name__ == '__main__':
                 else:
                     bot.openai_exec = False
 
-            elif (event == '_check_claude_'):
+            elif (event == '_check_freeai_'):
                 refresh_flag = True
-                if (values['_check_claude_'] == True):
-                    bot.claude_exec = True
+                if (values['_check_freeai_'] == True):
+                    bot.freeai_exec = True
                 else:
-                    bot.claude_exec = False
-
-            elif (event == '_check_gemini_'):
-                refresh_flag = True
-                if (values['_check_gemini_'] == True):
-                    bot.gemini_exec = True
-                else:
-                    bot.gemini_exec = False
-
-            elif (event == '_check_perplexity_'):
-                refresh_flag = True
-                if (values['_check_perplexity_'] == True):
-                    bot.perplexity_exec = True
-                else:
-                    bot.perplexity_exec = False
+                    bot.freeai_exec = False
 
             elif (event == '_check_ollama_'):
                 refresh_flag = True
@@ -1417,13 +1361,6 @@ if __name__ == '__main__':
                     bot.ollama_exec = True
                 else:
                     bot.ollama_exec = False
-
-            elif (event == '_check_freeai_'):
-                refresh_flag = True
-                if (values['_check_freeai_'] == True):
-                    bot.freeai_exec = True
-                else:
-                    bot.freeai_exec = False
 
             elif (event == '_check_imageOCR_'):
                 refresh_flag = True

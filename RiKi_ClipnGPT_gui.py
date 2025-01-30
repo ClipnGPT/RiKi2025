@@ -467,11 +467,8 @@ class _gui:
                 # 内容
                 [sg.Frame(layout=[
                     [sg.Checkbox('OpenAI/Azure', key='_check_openai_', default=True, enable_events=True, size=(check_size,1)),
-                     sg.Checkbox('Claude', key='_check_claude_', default=True, enable_events=True, size=(check_size,1)),
-                     sg.Checkbox('Gemini', key='_check_gemini_', default=True, enable_events=True, size=(check_size,1)),
-                     sg.Checkbox('Perplexity', key='_check_perplexity_', default=True, enable_events=True, size=(check_size,1)),
-                     sg.Checkbox('Ollama', key='_check_ollama_', default=True, enable_events=True, size=(check_size,1)),
-                     sg.Checkbox('FreeAI', key='_check_freeai_', default=True, enable_events=True, size=(check_size,1)), ],
+                     sg.Checkbox('FreeAI', key='_check_freeai_', default=True, enable_events=True, size=(check_size,1)),
+                     sg.Checkbox('Ollama', key='_check_ollama_', default=True, enable_events=True, size=(check_size,1)), ],
                 ], title='[ LLMs ]', key='_frame_llms_', ),
                 sg.Frame(layout=[
                     [sg.Checkbox('AutoUpload', key='_check_autoUpload_', default=True, enable_events=True, size=(check_size,1)),
@@ -812,26 +809,14 @@ class _gui:
             self.window['_check_openai_'].update(background_color=chk_on_bg, text_color=chk_on_tc, )
         else:
             self.window['_check_openai_'].update(background_color=chk_off_bg, text_color=chk_off_tc, )
-        if (self.window['_check_claude_'].get() == True):
-            self.window['_check_claude_'].update(background_color=chk_on_bg, text_color=chk_on_tc, )
-        else:
-            self.window['_check_claude_'].update(background_color=chk_off_bg, text_color=chk_off_tc, )
-        if (self.window['_check_gemini_'].get() == True):
-            self.window['_check_gemini_'].update(background_color=chk_on_bg, text_color=chk_on_tc, )
-        else:
-            self.window['_check_gemini_'].update(background_color=chk_off_bg, text_color=chk_off_tc, )
-        if (self.window['_check_perplexity_'].get() == True):
-            self.window['_check_perplexity_'].update(background_color=chk_on_bg, text_color=chk_on_tc, )
-        else:
-            self.window['_check_perplexity_'].update(background_color=chk_off_bg, text_color=chk_off_tc, )
-        if (self.window['_check_ollama_'].get() == True):
-            self.window['_check_ollama_'].update(background_color=chk_on_bg, text_color=chk_on_tc, )
-        else:
-            self.window['_check_ollama_'].update(background_color=chk_off_bg, text_color=chk_off_tc, )
         if (self.window['_check_freeai_'].get() == True):
             self.window['_check_freeai_'].update(background_color=chk_on_bg, text_color=chk_on_tc, )
         else:
             self.window['_check_freeai_'].update(background_color=chk_off_bg, text_color=chk_off_tc, )
+        if (self.window['_check_ollama_'].get() == True):
+            self.window['_check_ollama_'].update(background_color=chk_on_bg, text_color=chk_on_tc, )
+        else:
+            self.window['_check_ollama_'].update(background_color=chk_off_bg, text_color=chk_off_tc, )
         if (self.window['_check_autoUpload_'].get() == True):
             self.window['_check_autoUpload_'].update(background_color=chk_on_bg, text_color=chk_on_tc, )
         else:
@@ -997,11 +982,8 @@ if __name__ == '__main__':
             or   (event == '_check_toGPT_') \
             or   (event == '_check_toClip_') \
             or   (event == '_check_openai_') \
-            or   (event == '_check_claude_') \
-            or   (event == '_check_gemini_') \
-            or   (event == '_check_perplexity_') \
-            or   (event == '_check_ollama_') \
             or   (event == '_check_freeai_') \
+            or   (event == '_check_ollama_') \
             or   (event == '_check_autoUpload_') \
             or   (event == '_check_autoSandbox_') \
             or   (event == '_check_debugMode_'):

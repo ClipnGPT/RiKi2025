@@ -102,49 +102,37 @@ class _class:
                         "type": "string",
                         "description": "openai実行有効 yes,no 例) yes"
                     },
-                    "claude_exec": {
+                    "freeai_exec": {
                         "type": "string",
-                        "description": "claude実行有効 yes,no 例) yes"
-                    },
-                    "gemini_exec": {
-                        "type": "string",
-                        "description": "gemini実行有効 yes,no 例) yes"
-                    },
-                    "perplexity_exec": {
-                        "type": "string",
-                        "description": "perplexity実行有効 yes,no 例) yes"
+                        "description": "freeai実行有効 yes,no 例) yes"
                     },
                     "ollama_exec": {
                         "type": "string",
                         "description": "ollama実行有効 yes,no 例) yes"
                     },
-                    "freeai_exec": {
-                        "type": "string",
-                        "description": "freeai実行有効 yes,no 例) yes"
-                    },
                     "engine_greeting": {
                         "type": "string",
-                        "description": "greetingエンジン auto,openai,claude,gemini,perplexity,local,freeai, 例) auto"
+                        "description": "greetingエンジン auto,openai,freeai,local, 例) auto"
                     },
                     "engine_chat": {
                         "type": "string",
-                        "description": "chatエンジン auto,openai,claude,gemini,perplexity,local,freeai, 例) auto"
+                        "description": "chatエンジン auto,openai,freeai,local, 例) auto"
                     },
                     "engine_vision": {
                         "type": "string",
-                        "description": "visionエンジン auto,openai,claude,gemini,perplexity,local,freeai, 例) auto"
+                        "description": "visionエンジン auto,openai,freeai,local, 例) auto"
                     },
                     "engine_fileSearch": {
                         "type": "string",
-                        "description": "fileSearchエンジン auto,openai,claude,gemini,perplexity,local,freeai, 例) auto"
+                        "description": "fileSearchエンジン auto,openai,freeai,local, 例) auto"
                     },
                     "engine_webSearch": {
                         "type": "string",
-                        "description": "webSearchエンジン auto,openai,claude,gemini,perplexity,local,freeai, 例) auto"
+                        "description": "webSearchエンジン auto,openai,freeai,local, 例) auto"
                     },
                     "engine_assistant": {
                         "type": "string",
-                        "description": "assistantエンジン auto,openai,claude,gemini,perplexity,local,freeai, 例) auto"
+                        "description": "assistantエンジン auto,openai,freeai,local, 例) auto"
                     },
                     "runStep": {
                         "type": "string",
@@ -163,18 +151,15 @@ class _class:
                         "description": "会話クラス 例) chat"
                     },
                 },
-                "required": ["runMode", "openai_enable", "claude_enable", "gemini_enable", "perplexity_enable", "ollama_enable", "freeai_enable", "engine_chat", "engine_vision", "engine_assistant", "runStep"]
+                "required": ["runMode", "openai_enable", "freeai_enable", "ollama_enable", "engine_chat", "engine_vision", "engine_assistant", "runStep"]
             }
         }
 
         # 初期設定
         self.runMode                = 'assistant'
         self.openai_exec            = True
-        self.claude_exec            = True
-        self.gemini_exec            = True
-        self.perplexity_exec        = True
-        self.ollama_exec            = True
         self.freeai_exec            = True
+        self.ollama_exec            = True
         self.cgpt_engine_greeting   = 'auto'
         self.cgpt_engine_chat       = 'auto'
         self.cgpt_engine_vision     = 'auto'
@@ -191,11 +176,8 @@ class _class:
 
         # 引数
         openai_exec     = ''
-        claude_exec     = ''
-        gemini_exec     = ''
-        perplexity_exec = ''
-        ollama_exec     = ''
         freeai_exec     = ''
+        ollama_exec     = ''
         runStep         = ''
         historyText     = ''
         inpText         = ''
@@ -204,11 +186,8 @@ class _class:
             args_dic = json.loads(json_kwargs)
             self.runMode                = args_dic.get('runMode', self.runMode)
             openai_exec                 = args_dic.get('openai_exec', '')
-            claude_exec                 = args_dic.get('claude_exec', '')
-            gemini_exec                 = args_dic.get('gemini_exec', '')
-            perplexity_exec             = args_dic.get('perplexity_exec', '')
-            ollama_exec                 = args_dic.get('ollama_exec', '')
             freeai_exec                 = args_dic.get('freeai_exec', '')
+            ollama_exec                 = args_dic.get('ollama_exec', '')
             self.cgpt_engine_greeting   = args_dic.get('engine_greeting', self.cgpt_engine_greeting)
             self.cgpt_engine_chat       = args_dic.get('engine_chat', self.cgpt_engine_chat)
             self.cgpt_engine_vision     = args_dic.get('engine_vision', self.cgpt_engine_vision)
@@ -225,31 +204,16 @@ class _class:
                 self.openai_exec = True
             else:
                 self.openai_exec = False
-        if (claude_exec != ''):
-            if (claude_exec in ['yes', 'True']):
-                self.claude_exec = True
-            else:
-                self.claude_exec = False
-        if (gemini_exec != ''):
-            if (gemini_exec in ['yes', 'True']):
-                self.gemini_exec = True
-            else:
-                self.gemini_exec = False
-        if (perplexity_exec != ''):
-            if (perplexity_exec in ['yes', 'True']):
-                self.perplexity_exec = True
-            else:
-                self.perplexity_exec = False
-        if (ollama_exec != ''):
-            if (ollama_exec in ['yes', 'True']):
-                self.ollama_exec = True
-            else:
-                self.ollama_exec = False
         if (freeai_exec != ''):
             if (freeai_exec in ['yes', 'True']):
                 self.freeai_exec = True
             else:
                 self.freeai_exec = False
+        if (ollama_exec != ''):
+            if (ollama_exec in ['yes', 'True']):
+                self.ollama_exec = True
+            else:
+                self.ollama_exec = False
 
         # ------------------------------
         # ステップ１
@@ -257,25 +221,19 @@ class _class:
         if (str(runStep) == '1'):
 
             # エンジン選択
-            res_engine = 'gemini'
-            if   ((self.openai_exec == True) and (self.claude_exec == True) and (self.gemini_exec == True) and (self.perplexity_exec == True)):
+            res_engine = 'freeai'
+            if   ((self.openai_exec == True) and (self.freeai_exec == True)):
                 if (self.cgpt_engine_chat != 'auto'):
                     res_engine = self.cgpt_engine_chat
-            if   ((self.openai_exec == True) and (self.claude_exec != True) and (self.gemini_exec != True) and (self.perplexity_exec != True) and (self.ollama_exec != True) and (self.freeai_exec != True)):
+            if   ((self.openai_exec == True) and (self.freeai_exec != True) and (self.ollama_exec != True)):
                 res_engine = 'openai'
-            elif ((self.openai_exec != True) and (self.claude_exec == True) and (self.gemini_exec != True) and (self.perplexity_exec != True) and (self.ollama_exec != True) and (self.freeai_exec != True)):
-                res_engine = 'claude'
-            elif ((self.openai_exec != True) and (self.claude_exec != True) and (self.gemini_exec == True) and (self.perplexity_exec != True) and (self.ollama_exec != True) and (self.freeai_exec != True)):
-                res_engine = 'gemini'
-            elif ((self.openai_exec != True) and (self.claude_exec != True) and (self.gemini_exec != True) and (self.perplexity_exec == True) and (self.ollama_exec != True) and (self.freeai_exec != True)):
-                res_engine = 'perplexity'
-            elif ((self.openai_exec != True) and (self.claude_exec != True) and (self.gemini_exec != True) and (self.perplexity_exec != True) and (self.ollama_exec == True) and (self.freeai_exec != True)):
-                res_engine = 'ollama'
-            elif ((self.openai_exec != True) and (self.claude_exec != True) and (self.gemini_exec != True) and (self.perplexity_exec != True) and (self.ollama_exec != True) and (self.freeai_exec == True)):
+            elif ((self.openai_exec != True) and (self.freeai_exec == True) and (self.ollama_exec != True)):
                 res_engine = 'freeai'
+            elif ((self.openai_exec != True) and (self.freeai_exec != True) and (self.ollama_exec == True)):
+                res_engine = 'ollama'
 
             # 要求文
-            if (res_engine == 'gemini') or (res_engine == 'freeai'):
+            if (res_engine == 'freeai'):
                 res_sysText = res_sysText_ja
                 res_reqText = res_reqText_ja
             else:
@@ -310,62 +268,42 @@ class _class:
             or (chat_class == 'greeting') \
             or (chat_class == '簡単な挨拶'):
                 chat_class   = self.cgpt_engine_greeting
-                if (chat_class == 'auto') and (self.gemini_exec == True):
-                    chat_class  = 'gemini'
+                if (chat_class == 'auto') and (self.freeai_exec == True):
+                    chat_class  = 'freeai'
                 if (chat_class == 'auto') and (self.openai_exec == True):
                     chat_class  = 'openai'
-                if (chat_class == 'auto') and (self.claude_exec == True):
-                    chat_class  = 'claude'
-                if (chat_class == 'auto') and (self.perplexity_exec == True):
-                    chat_class  = 'perplexity'
 
             if (chat_class == 'chat') \
             or (chat_class == '複雑な挨拶') \
             or (chat_class == '簡単な会話') \
             or (chat_class == 'その他'):
                 chat_class   = self.cgpt_engine_chat
-                if (chat_class == 'auto') and (self.gemini_exec == True):
-                    chat_class  = 'gemini'
+                if (chat_class == 'auto') and (self.freeai_exec == True):
+                    chat_class  = 'freeai'
                 if (chat_class == 'auto') and (self.openai_exec == True):
                     chat_class  = 'openai'
-                if (chat_class == 'auto') and (self.claude_exec == True):
-                    chat_class  = 'claude'
-                if (chat_class == 'auto') and (self.perplexity_exec == True):
-                    chat_class  = 'perplexity'
 
             if (chat_class == 'vision') \
             or (chat_class == '画像分析'):
                 chat_class  = self.cgpt_engine_vision
-                if (chat_class == 'auto') and (self.gemini_exec == True):
-                    chat_class  = 'gemini'
+                if (chat_class == 'auto') and (self.freeai_exec == True):
+                    chat_class  = 'freeai'
                 if (chat_class == 'auto') and (self.openai_exec == True):
                     chat_class  = 'openai'
-                if (chat_class == 'auto') and (self.claude_exec == True):
-                    chat_class  = 'claude'
-                if (chat_class == 'auto') and (self.perplexity_exec == True):
-                    chat_class  = 'perplexity'
 
             if (chat_class == 'fileSearch') \
             or (chat_class == '文書検索'):
                 chat_class  = self.cgpt_engine_fileSearch
                 if (chat_class == 'auto') and (self.openai_exec == True):
                     chat_class  = 'assistant' #'openai'
-                if (chat_class == 'auto') and (self.gemini_exec == True):
-                    chat_class  = 'gemini'
-                if (chat_class == 'auto') and (self.claude_exec == True):
-                    chat_class  = 'claude'
-                if (chat_class == 'auto') and (self.perplexity_exec == True):
-                    chat_class  = 'perplexity'
+                if (chat_class == 'auto') and (self.freeai_exec == True):
+                    chat_class  = 'freeai'
 
             if (chat_class == 'webSearch') \
             or (chat_class == 'ウェブ検索'):
                 chat_class  = self.cgpt_engine_webSearch
-                if (chat_class == 'auto') and (self.perplexity_exec == True):
-                    chat_class  = 'perplexity'
-                if (chat_class == 'auto') and (self.gemini_exec == True):
-                    chat_class  = 'gemini'
-                if (chat_class == 'auto') and (self.claude_exec == True):
-                    chat_class  = 'claude'
+                if (chat_class == 'auto') and (self.freeai_exec == True):
+                    chat_class  = 'freeai'
                 if (chat_class == 'auto') and (self.openai_exec == True):
                     chat_class  = 'assistant' #'openai'
 
@@ -377,52 +315,20 @@ class _class:
                 chat_class  = self.cgpt_engine_assistant
                 if (chat_class == 'auto') and (self.openai_exec == True):
                     chat_class  = 'assistant' #'openai'
-                if (chat_class == 'auto') and (self.claude_exec == True):
-                    chat_class  = 'claude'
-                if (chat_class == 'auto') and (self.gemini_exec == True):
-                    chat_class  = 'gemini'
-                if (chat_class == 'auto') and (self.perplexity_exec == True):
-                    chat_class  = 'perplexity'
+                if (chat_class == 'auto') and (self.freeai_exec == True):
+                    chat_class  = 'freeai'
 
-            elif (chat_class == 'claude') \
-            or   (chat_class == 'haiku') or (chat_class == 'sonnet') or (chat_class == 'opus'):
-                if (self.claude_exec != True):
-                    if   (self.gemini_exec == True):
-                        chat_class = 'gemini'
-                    elif (self.openai_exec == True):
-                        chat_class = 'assistant' #'openai"
-                    elif (self.perplexity_exec == True):
-                        chat_class = 'perplexity'
-
-            elif (chat_class == 'gemini') \
-            or   (chat_class == 'flash') or (chat_class == 'pro') or (chat_class == 'ultra'):
-                if (self.gemini_exec != True):
-                    if   (self.claude_exec == True):
-                        chat_class = 'cloude'
-                    elif (self.openai_exec == True):
-                        chat_class = 'assistant' #'openai'
-                    elif (self.perplexity_exec == True):
-                        chat_class = 'perplexity'
-
-            elif (chat_class == 'perplexity') \
-            or   (chat_class == 'mixtral') or (chat_class == 'llama3') or (chat_class == 'pplx'):
-                if (self.perplexity_exec != True):
-                    if   (self.claude_exec == True):
-                        chat_class = 'cloude'
-                    elif (self.gemini_exec == True):
-                        chat_class = 'gemini'
-                    elif (self.openai_exec == True):
+            elif (chat_class == 'freeai') \
+            or   (chat_class == 'f-flash') or (chat_class == 'f-pro') or (chat_class == 'f-ultra'):
+                if (self.freeai_exec != True):
+                    if   (self.openai_exec == True):
                         chat_class = 'assistant' #'openai'
 
             elif (chat_class == 'ollama') \
             or   (chat_class == 'mini') or (chat_class == 'phi3') or (chat_class == 'moondream'):
                 if (self.ollama_exec != True):
-                    if   (self.perplexity_exec == True):
-                        chat_class = 'perplexity'
-                    elif (self.gemini_exec == True):
-                        chat_class = 'gemini'
-                    elif (self.claude_exec == True):
-                        chat_class = 'claude'
+                    if   (self.freeai_exec == True):
+                        chat_class = 'freeai'
                     elif (self.openai_exec == True):
                         chat_class = 'openai'
 
@@ -440,47 +346,29 @@ class _class:
             or   (chat_class == 'アシスタント'):
                 if (self.openai_exec == True):
                     res_engine = 'openai'
-            elif (chat_class == 'claude') \
-            or   (chat_class == 'haiku') or (chat_class == 'sonnet') or (chat_class == 'opus'):
-                if (self.claude_exec == True):
-                    res_engine = 'claude'
-            elif (chat_class == 'gemini') \
-            or   (chat_class == 'flash') or (chat_class == 'pro') or (chat_class == 'ultra'):
-                if (self.gemini_exec == True):
-                    res_engine = 'gemini'
-            elif (chat_class == 'perplexity') \
-            or   (chat_class == 'mixtral') or (chat_class == 'llama3') or (chat_class == 'pplx'):
-                if (self.perplexity_exec == True):
-                    res_engine = 'perplexity'
-            elif (chat_class == 'ollama') \
-            or   (chat_class == 'mini') or (chat_class == 'phi3') or (chat_class == 'moondream'):
-                if (self.ollama_exec == True):
-                    res_engine = 'ollama'
             elif (chat_class == 'freeai') \
             or   (chat_class == 'f-flash') or (chat_class == 'free') or (chat_class == 'f-ultra'):
                 if (self.freeai_exec == True):
                     res_engine = 'freeai'
+            elif (chat_class == 'ollama') \
+            or   (chat_class == 'mini') or (chat_class == 'phi3') or (chat_class == 'moondream'):
+                if (self.ollama_exec == True):
+                    res_engine = 'ollama'
 
             # 省略時エンジン
             if (res_engine == 'auto'):
-                res_engine = 'gemini'
+                res_engine = 'freeai'
 
             # エンジン補正
-            if (self.openai_exec == True) or (self.claude_exec == True) \
-            or (self.gemini_exec == True) or (self.perplexity_exec == True) \
-            or (self.ollama_exec == True) or (self.freeai_exec == True):
-                if   ((self.openai_exec == True) and (self.claude_exec != True) and (self.gemini_exec != True) and (self.perplexity_exec != True) and (self.ollama_exec != True) and (self.freeai_exec != True)):
+            if (self.openai_exec == True) \
+            or (self.freeai_exec == True) \
+            or (self.ollama_exec == True):
+                if   ((self.openai_exec == True) and (self.freeai_exec != True) and (self.ollama_exec != True)):
                     res_engine = 'openai'
-                elif ((self.openai_exec != True) and (self.claude_exec == True) and (self.gemini_exec != True) and (self.perplexity_exec != True) and (self.ollama_exec != True) and (self.freeai_exec != True)):
-                    res_engine = 'claude'
-                elif ((self.openai_exec != True) and (self.claude_exec != True) and (self.gemini_exec == True) and (self.perplexity_exec != True) and (self.ollama_exec != True) and (self.freeai_exec != True)):
-                    res_engine = 'gemini'
-                elif ((self.openai_exec != True) and (self.claude_exec != True) and (self.gemini_exec != True) and (self.perplexity_exec == True) and (self.ollama_exec != True) and (self.freeai_exec != True)):
-                    res_engine = 'perplexity'
-                elif ((self.openai_exec != True) and (self.claude_exec != True) and (self.gemini_exec != True) and (self.perplexity_exec != True) and (self.ollama_exec == True) and (self.freeai_exec != True)):
-                    res_engine = 'ollama'
-                elif ((self.openai_exec != True) and (self.claude_exec != True) and (self.gemini_exec != True) and (self.perplexity_exec != True) and (self.ollama_exec != True) and (self.freeai_exec == True)):
+                elif ((self.openai_exec != True) and (self.freeai_exec == True) and (self.ollama_exec != True)):
                     res_engine = 'freeai'
+                elif ((self.openai_exec != True) and (self.freeai_exec != True) and (self.ollama_exec == True)):
+                    res_engine = 'ollama'
 
             # 戻り
             dic = {}
