@@ -37,6 +37,8 @@ def getkey(api, key):
             return 'your perplexity (a) model'
         if (key == 'perplexity_a_token'):
             return 'your perplexity (a) token'
+        if (key == 'perplexity_a_use_tools'):
+            return 'your perplexity (a) use tools'
 
         if (key == 'perplexity_b_nick_name'):
             return 'your perplexity (b) nick name'
@@ -44,6 +46,8 @@ def getkey(api, key):
             return 'your perplexity (b) model'
         if (key == 'perplexity_b_token'):
             return 'your perplexity (b) token'
+        if (key == 'perplexity_b_use_tools'):
+            return 'your perplexity (b) use tools'
 
         if (key == 'perplexity_v_nick_name'):
             return 'your perplexity (v) nick name'
@@ -51,6 +55,8 @@ def getkey(api, key):
             return 'your perplexity (v) model'
         if (key == 'perplexity_v_token'):
             return 'your perplexity (v) token'
+        if (key == 'perplexity_v_use_tools'):
+            return 'your perplexity (v) use tools'
 
         if (key == 'perplexity_x_nick_name'):
             return 'your perplexity (x) nick name'
@@ -58,6 +64,8 @@ def getkey(api, key):
             return 'your perplexity (x) model'
         if (key == 'perplexity_x_token'):
             return 'your perplexity (x) token'
+        if (key == 'perplexity_x_use_tools'):
+            return 'your perplexity (x) use tools'
 
     return False
 
