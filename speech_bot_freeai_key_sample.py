@@ -27,6 +27,8 @@ def getkey(api, key):
             return 'chat max step'
         if (key == 'freeai_max_session'):
             return 'use max session'
+        if (key == 'freeai_max_wait_sec'):
+            return 'chat max wait(sec)'
 
         if (key == 'freeai_key_id'):
             return 'your freeai key'
@@ -37,6 +39,8 @@ def getkey(api, key):
             return 'your freeai (a) model'
         if (key == 'freeai_a_token'):
             return 'your freeai (a) token'
+        if (key == 'freeai_a_use_tools'):
+            return 'your freeai (a) use tools'
 
         if (key == 'freeai_b_nick_name'):
             return 'your freeai (b) nick name'
@@ -44,6 +48,8 @@ def getkey(api, key):
             return 'your freeai (b) model'
         if (key == 'freeai_b_token'):
             return 'your freeai (b) token'
+        if (key == 'freeai_b_use_tools'):
+            return 'your freeai (b) use tools'
 
         if (key == 'freeai_v_nick_name'):
             return 'your freeai (v) nick name'
@@ -51,6 +57,8 @@ def getkey(api, key):
             return 'your freeai (v) model'
         if (key == 'freeai_v_token'):
             return 'your freeai (v) token'
+        if (key == 'freeai_v_use_tools'):
+            return 'your freeai (v) use tools'
 
         if (key == 'freeai_x_nick_name'):
             return 'your freeai (x) nick name'
@@ -58,6 +66,8 @@ def getkey(api, key):
             return 'your freeai (x) model'
         if (key == 'freeai_x_token'):
             return 'your freeai (x) token'
+        if (key == 'freeai_x_use_tools'):
+            return 'your freeai (x) use tools'
 
     return False
 

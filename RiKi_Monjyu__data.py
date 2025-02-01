@@ -94,7 +94,14 @@ class _data_class:
         self.mode_setting = {}
         self.addins_setting = {}
         self.engine_models = {}
+        self.engine_models['chatgpt'] = {}
+        self.engine_models['assistant'] = {}
+        self.engine_models['gemini'] = {}
+        self.engine_models['freeai'] = {}
+        self.engine_models['claude'] = {}
         self.engine_models['openrt'] = {}
+        self.engine_models['perplexity'] = {}
+        self.engine_models['groq'] = {}
         self.engine_models['ollama'] = {}
         self.engine_setting = {}
         self.live_voices = {}
@@ -202,7 +209,7 @@ class _data_class:
         }
 
         # engineの設定
-        self.engine_setting['openrt'] = {
+        self.engine_setting['chatgpt'] = {
             "max_wait_sec": "", 
             "a_model": "", 
             "a_use_tools": "", 
@@ -213,7 +220,14 @@ class _data_class:
             "x_model": "",
             "x_use_tools": "" 
         }
-        self.engine_setting['ollama'] = self.engine_setting['openrt']
+        self.engine_models['assistant'] = self.engine_setting['chatgpt']
+        self.engine_models['gemini'] = self.engine_setting['chatgpt']
+        self.engine_models['freeai'] = self.engine_setting['chatgpt']
+        self.engine_models['claude'] = self.engine_setting['chatgpt']
+        self.engine_models['openrt'] = self.engine_setting['chatgpt']
+        self.engine_models['perplexity'] = self.engine_setting['chatgpt']
+        self.engine_models['groq'] = self.engine_setting['chatgpt']
+        self.engine_models['ollama'] = self.engine_setting['chatgpt']
 
         # liveの設定
         self.live_voices[ 'freeai'] = { "Puck": "Puck", 

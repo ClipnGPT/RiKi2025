@@ -27,6 +27,8 @@ def getkey(api, key):
             return 'chat max step'
         if (key == 'gemini_max_session'):
             return 'use max session'
+        if (key == 'gemini_max_wait_sec'):
+            return 'chat max wait(sec)'
 
         if (key == 'gemini_key_id'):
             return 'your gemini key'
@@ -37,6 +39,8 @@ def getkey(api, key):
             return 'your gemini (a) model'
         if (key == 'gemini_a_token'):
             return 'your gemini (a) token'
+        if (key == 'gemini_a_use_tools'):
+            return 'your gemini (a) use tools'
 
         if (key == 'gemini_b_nick_name'):
             return 'your gemini (b) nick name'
@@ -44,6 +48,8 @@ def getkey(api, key):
             return 'your gemini (b) model'
         if (key == 'gemini_b_token'):
             return 'your gemini (b) token'
+        if (key == 'gemini_b_use_tools'):
+            return 'your gemini (b) use tools'
 
         if (key == 'gemini_v_nick_name'):
             return 'your gemini (v) nick name'
@@ -51,6 +57,8 @@ def getkey(api, key):
             return 'your gemini (v) model'
         if (key == 'gemini_v_token'):
             return 'your gemini (v) token'
+        if (key == 'gemini_v_use_tools'):
+            return 'your gemini (v) use tools'
 
         if (key == 'gemini_x_nick_name'):
             return 'your gemini (x) nick name'
@@ -58,6 +66,8 @@ def getkey(api, key):
             return 'your gemini (x) model'
         if (key == 'gemini_x_token'):
             return 'your gemini (x) token'
+        if (key == 'gemini_x_use_tools'):
+            return 'your gemini (x) use tools'
 
     return False
 

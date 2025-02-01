@@ -27,6 +27,8 @@ def getkey(api, key):
             return 'chat max step'
         if (key == 'groq_max_session'):
             return 'use max session'
+        if (key == 'groq_max_wait_sec'):
+            return 'chat max wait(sec)'
 
         if (key == 'groq_key_id'):
             return 'your groq key'
@@ -37,6 +39,8 @@ def getkey(api, key):
             return 'your groq (a) model'
         if (key == 'groq_a_token'):
             return 'your groq (a) token'
+        if (key == 'groq_a_use_tools'):
+            return 'your groq (a) use tools'
 
         if (key == 'groq_b_nick_name'):
             return 'your groq (b) nick name'
@@ -44,6 +48,8 @@ def getkey(api, key):
             return 'your groq (b) model'
         if (key == 'groq_b_token'):
             return 'your groq (b) token'
+        if (key == 'groq_b_use_tools'):
+            return 'your groq (b) use tools'
 
         if (key == 'groq_v_nick_name'):
             return 'your groq (v) nick name'
@@ -51,6 +57,8 @@ def getkey(api, key):
             return 'your groq (v) model'
         if (key == 'groq_v_token'):
             return 'your groq (v) token'
+        if (key == 'groq_v_use_tools'):
+            return 'your groq (v) use tools'
 
         if (key == 'groq_x_nick_name'):
             return 'your groq (x) nick name'
@@ -58,6 +66,8 @@ def getkey(api, key):
             return 'your groq (x) model'
         if (key == 'groq_x_token'):
             return 'your groq (x) token'
+        if (key == 'groq_x_use_tools'):
+            return 'your groq (x) use tools'
 
     return False
 
