@@ -59,24 +59,24 @@ class qCV2_class:
 
         # cascade
         self.cascade_procSize       = 640
-        self.cascade_xml_face       = '_cv2data/xml/_vision_opencv_face.xml'
-        self.cascade_xml_cars       = '_cv2data/xml/_vision_opencv_cars.xml'
-        self.cascade_xml_fullbody   = '_cv2data/xml/_vision_opencv_fullbody.xml'
+        self.cascade_xml_face       = '_datas/xml/_vision_opencv_face.xml'
+        self.cascade_xml_cars       = '_datas/xml/_vision_opencv_cars.xml'
+        self.cascade_xml_fullbody   = '_datas/xml/_vision_opencv_fullbody.xml'
         self.cascade_casName        = self.cascade_xml_face
         #self.cascade_cascade       = cv2.CascadeClassifier(self.cascade_casName)
         self.cascade_cascade        = None
 
         # ssd
         self.ssd_procSize           = 512
-        self.ssd_config             = '_cv2data/dnn/ssd/frozen_inference_graph.pb'
-        self.ssd_weights            = '_cv2data/dnn/ssd/ssd_mobilenet_v2_coco_2018_03_29.pbtxt'
+        self.ssd_config             = '_datas/dnn/ssd/frozen_inference_graph.pb'
+        self.ssd_weights            = '_datas/dnn/ssd/ssd_mobilenet_v2_coco_2018_03_29.pbtxt'
         self.ssd_threshold_score    = 0.8
         self.ssd_threshold_nms      = 0.45
         #self.ssd_model             = cv2.dnn.readNetFromTensorflow(self.ssd_config, self.ssd_weights)
         self.ssd_model              = None
         self.ssd_labels             = []
         self.ssd_colors             = []
-        res, _                      = qFunc.txtsRead('_cv2data/dnn/ssd/labels.txt', )
+        res, _                      = qFunc.txtsRead('_datas/dnn/ssd/labels.txt', )
         if (res != False):
             self.ssd_labels         = res
         for n in range(len(self.ssd_labels)):
@@ -84,17 +84,17 @@ class qCV2_class:
 
         # yolov8 -> onnx
         self.yolov8_procSize        = 640
-        #self.yolov8_model = YOLO('_cv2data/yolov8/yolov8n.pt')
+        #self.yolov8_model = YOLO('_datas/yolov8/yolov8n.pt')
         #self.yolov8_model.export(format='onnx', imgsz=self.yolov8_procSize, opset=12, )
 
         # yolov8
-        self.yolov8_weights         = '_cv2data/yolov8/yolov8n.onnx'
+        self.yolov8_weights         = '_datas/yolov8/yolov8n.onnx'
         self.yolov8_model           = None
         self.yolov8_threshold_score = 0.8
         self.yolov8_threshold_nms   = 0.45
         self.yolov8_labels          = []
         self.yolov8_colors          = []
-        res, _                      = qFunc.txtsRead('_cv2data/yolov8/yolov8_labels.txt', )
+        res, _                      = qFunc.txtsRead('_datas/yolov8/yolov8_labels.txt', )
         if (res != False):
             self.yolov8_labels      = res
         for n in range(len(self.yolov8_labels)):
@@ -103,12 +103,12 @@ class qCV2_class:
         # yolov4
         # normal
         #self.yolov4_procSize       = 512
-        #self.yolov4_config         = '_cv2data/yolov4/yolov4_512x512.cfg'
-        #self.yolov4_weights        = '_cv2data/yolov4/yolov4_512x512.weights'
+        #self.yolov4_config         = '_datas/yolov4/yolov4_512x512.cfg'
+        #self.yolov4_weights        = '_datas/yolov4/yolov4_512x512.weights'
         # tiny
         self.yolov4_procSize        = 416
-        self.yolov4_config          = '_cv2data/yolov4/yolov4-tiny_416x416.cfg'
-        self.yolov4_weights         = '_cv2data/yolov4/yolov4-tiny_416x416.weights'
+        self.yolov4_config          = '_datas/yolov4/yolov4-tiny_416x416.cfg'
+        self.yolov4_weights         = '_datas/yolov4/yolov4-tiny_416x416.weights'
         #self.yolov4_net            = cv2.dnn.readNet(self.yolov4_config, self.yolov4_weights)
         #self.yolov4_model          = cv2.dnn_DetectionModel(self.yolov4_net, )
         #self.yolov4_model.setInputParams(scale=1 / 255, size=(self.yolov4_procSize, self.yolov4_procSize), swapRB=True, )
@@ -118,7 +118,7 @@ class qCV2_class:
         self.yolov4_nmsThreshold    = 0.45
         self.yolov4_labels          = []
         self.yolov4_colors          = []
-        res, _                      = qFunc.txtsRead('_cv2data/yolov4/yolov4_labels.txt', )
+        res, _                      = qFunc.txtsRead('_datas/yolov4/yolov4_labels.txt', )
         if (res != False):
             self.yolov4_labels      = res
         for n in range(len(self.yolov4_labels)):

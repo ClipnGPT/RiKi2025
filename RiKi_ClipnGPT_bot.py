@@ -88,6 +88,7 @@ class _bot:
         self.freeai_auto_continue       = ''
         self.freeai_max_step            = ''
         self.freeai_max_session         = ''
+        self.freeai_max_wait_sec        = ''
 
         self.ollama_api_type            = 'ollama'
         self.ollama_default_gpt         = 'auto'
@@ -95,7 +96,7 @@ class _bot:
         self.ollama_auto_continue       = ''
         self.ollama_max_step            = ''
         self.ollama_max_session         = ''
-        self.ollama_max_wait_sec        = '120'
+        self.ollama_max_wait_sec        = ''
 
         self.openai_organization        = '< your openai organization >'
         self.openai_key_id              = '< your openai key >'
@@ -270,6 +271,7 @@ class _bot:
             #self.freeai_auto_continue       = conf._auto_continue
             #self.freeai_max_step            = conf._max_step
             #self.freeai_max_session         = conf.freeai_max_session
+            #self.freeai_max_wait_sec        = conf.freeai_max_wait_sec
 
             #self.ollama_api_type            = conf.ollama_api_type
             #self.ollama_default_gpt         = conf.ollama_default_gpt
@@ -547,6 +549,10 @@ class _bot:
         if  (self.freeai_max_session != ''):
             freeai_max_session = self.freeai_max_session
 
+        freeai_max_wait_sec  = ollama_key.getkey('ollama','freeai_max_wait_sec')
+        if  (self.freeai_max_wait_sec != ''):
+            freeai_max_wait_sec = self.freeai_max_wait_sec
+
         freeai_key_id = freeai_key.getkey('freeai','freeai_key_id')
         if  (self.freeai_key_id != '< your freeai key >') \
         and (self.freeai_key_id != ''):
@@ -555,18 +561,22 @@ class _bot:
         freeai_a_nick_name = freeai_key.getkey('freeai','freeai_a_nick_name')
         freeai_a_model     = freeai_key.getkey('freeai','freeai_a_model')
         freeai_a_token     = freeai_key.getkey('freeai','freeai_a_token')
+        freeai_a_use_tools = freeai_key.getkey('freeai','freeai_a_use_tools')
 
         freeai_b_nick_name = freeai_key.getkey('freeai','freeai_b_nick_name')
         freeai_b_model     = freeai_key.getkey('freeai','freeai_b_model')
         freeai_b_token     = freeai_key.getkey('freeai','freeai_b_token')
+        freeai_b_use_tools = freeai_key.getkey('freeai','freeai_b_use_tools')
 
         freeai_v_nick_name = freeai_key.getkey('freeai','freeai_v_nick_name')
         freeai_v_model     = freeai_key.getkey('freeai','freeai_v_model')
         freeai_v_token     = freeai_key.getkey('freeai','freeai_v_token')
+        freeai_v_use_tools = freeai_key.getkey('freeai','freeai_v_use_tools')
 
         freeai_x_nick_name = freeai_key.getkey('freeai','freeai_x_nick_name')
         freeai_x_model     = freeai_key.getkey('freeai','freeai_x_model')
         freeai_x_token     = freeai_key.getkey('freeai','freeai_x_token')
+        freeai_x_use_tools = freeai_key.getkey('freeai','freeai_x_use_tools')
 
         if  (self.freeai_model != ''):
                 limited_nick_name   = 'FreeAI'
@@ -576,26 +586,35 @@ class _bot:
                 freeai_a_nick_name  = limited_nick_name
                 freeai_a_model      = limited_model
                 freeai_a_token      = limited_token
+                freeai_a_use_tools  = 'no'
                 freeai_b_nick_name  = limited_nick_name
                 freeai_b_model      = limited_model
                 freeai_b_token      = limited_token
+                freeai_b_use_tools  = 'no'
                 freeai_v_nick_name  = limited_nick_name
                 freeai_v_model      = limited_model
                 freeai_v_token      = limited_token
+                freeai_v_use_tools  = 'no'
                 freeai_x_nick_name  = limited_nick_name
                 freeai_x_model      = limited_model
                 freeai_x_token      = limited_token
+                freeai_x_use_tools  = 'no'
 
         # freeai 認証
         res = self.freeaiAPI.authenticate('freeai',
                             freeai_api_type,
                             freeai_default_gpt, freeai_default_class,
                             freeai_auto_continue, freeai_max_step, freeai_max_session,
+                            freeai_max_wait_sec,
                             freeai_key_id,
                             freeai_a_nick_name, freeai_a_model, freeai_a_token,
+                            freeai_a_use_tools,
                             freeai_b_nick_name, freeai_b_model, freeai_b_token,
+                            freeai_b_use_tools,
                             freeai_v_nick_name, freeai_v_model, freeai_v_token,
+                            freeai_v_use_tools,
                             freeai_x_nick_name, freeai_x_model, freeai_x_token,
+                            freeai_x_use_tools,
                             )
         if (res == True):
             self.freeai_enable = True
