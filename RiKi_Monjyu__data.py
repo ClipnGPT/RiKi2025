@@ -88,11 +88,7 @@ class _data_class:
         self.subai_histories_all  = {}
 
         # 設定の保存
-        self.perplexity_enable = True
-        self.claude_enable = True
-        self.openai_enable = True
         self.mode_setting = {}
-        self.addins_setting = {}
         self.engine_models = {}
         self.engine_models['chatgpt'] = {}
         self.engine_models['assistant'] = {}
@@ -101,9 +97,11 @@ class _data_class:
         self.engine_models['claude'] = {}
         self.engine_models['openrt'] = {}
         self.engine_models['perplexity'] = {}
+        self.engine_models['grok'] = {}
         self.engine_models['groq'] = {}
         self.engine_models['ollama'] = {}
         self.engine_setting = {}
+        self.addins_setting = {}
         self.live_voices = {}
         self.live_setting = {}
         self.webAgent_useBrowser = ""
@@ -138,18 +136,6 @@ class _data_class:
             "after_proc": "none,", "after_engine": "",
             "check_proc": "none,", "check_engine": ""
         }
-
-        #if (self.perplexity_enable != True):
-        #    self.mode_setting['chat']['before_engine'] = ''
-        #    self.mode_setting['websearch']['before_engine'] = ''
-
-        #if (self.claude_enable != True):
-        #    self.mode_setting['chat']['after_engine'] = ''
-        #    self.mode_setting['websearch']['after_engine'] = ''
-
-        #if (self.openai_enable != True):
-        #    self.mode_setting['chat']['check_engine'] = ''
-        #    self.mode_setting['websearch']['check_engine'] = ''
 
         self.mode_setting['serial'] = {
             "req_engine": "", 
@@ -196,18 +182,6 @@ class _data_class:
             "check_proc": "none,", "check_engine": ""
         }
 
-        # addinsの設定
-        self.addins_setting = {
-            "result_text_save": "", 
-            "speech_tts_engine": "", 
-            "speech_stt_engine": "",
-            "text_clip_input": "",
-            "text_url_execute": "",
-            "text_pdf_execute": "",
-            "image_ocr_execute": "",
-            "image_yolo_execute": ""
-        }
-
         # engineの設定
         self.engine_setting['chatgpt'] = {
             "max_wait_sec": "", 
@@ -226,8 +200,21 @@ class _data_class:
         self.engine_models['claude'] = self.engine_setting['chatgpt']
         self.engine_models['openrt'] = self.engine_setting['chatgpt']
         self.engine_models['perplexity'] = self.engine_setting['chatgpt']
+        self.engine_models['grok'] = self.engine_setting['chatgpt']
         self.engine_models['groq'] = self.engine_setting['chatgpt']
         self.engine_models['ollama'] = self.engine_setting['chatgpt']
+
+        # addinsの設定
+        self.addins_setting = {
+            "result_text_save": "", 
+            "speech_tts_engine": "", 
+            "speech_stt_engine": "",
+            "text_clip_input": "",
+            "text_url_execute": "",
+            "text_pdf_execute": "",
+            "image_ocr_execute": "",
+            "image_yolo_execute": ""
+        }
 
         # liveの設定
         self.live_voices[ 'freeai'] = { "Puck": "Puck", 

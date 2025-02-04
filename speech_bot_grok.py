@@ -24,10 +24,10 @@ import requests
 
 
 
-# openrt チャットボット
+# grok チャットボット
 import openai
 
-import speech_bot_openrt_key  as openrt_key
+import speech_bot_grok_key  as grok_key
 
 
 
@@ -38,7 +38,7 @@ def base64_encode(file_path):
 
 
 
-class _openrtAPI:
+class _grokAPI:
 
     def __init__(self, ):
         self.log_queue              = None
@@ -46,39 +46,39 @@ class _openrtAPI:
 
         self.temperature            = 0.8
 
-        self.openrt_api_type        = 'openrt'
-        self.openrt_default_gpt     = 'auto'
-        self.openrt_default_class   = 'auto'
-        self.openrt_auto_continue   = 3
-        self.openrt_max_step        = 10
-        self.openrt_max_session     = 5
-        self.openrt_max_wait_sec    = 120
+        self.grok_api_type          = 'grok'
+        self.grok_default_gpt       = 'auto'
+        self.grok_default_class     = 'auto'
+        self.grok_auto_continue     = 3
+        self.grok_max_step          = 10
+        self.grok_max_session       = 5
+        self.grok_max_wait_sec      = 120
        
-        self.openrt_key_id          = None
+        self.grok_key_id            = None
 
-        self.openrt_a_enable        = False
-        self.openrt_a_nick_name     = ''
-        self.openrt_a_model         = None
-        self.openrt_a_token         = 0
-        self.openrt_a_use_tools     = 'no'
+        self.grok_a_enable          = False
+        self.grok_a_nick_name       = ''
+        self.grok_a_model           = None
+        self.grok_a_token           = 0
+        self.grok_a_use_tools       = 'no'
 
-        self.openrt_b_enable        = False
-        self.openrt_b_nick_name     = ''
-        self.openrt_b_model         = None
-        self.openrt_b_token         = 0
-        self.openrt_b_use_tools     = 'no'
+        self.grok_b_enable          = False
+        self.grok_b_nick_name       = ''
+        self.grok_b_model           = None
+        self.grok_b_token           = 0
+        self.grok_b_use_tools       = 'no'
 
-        self.openrt_v_enable        = False
-        self.openrt_v_nick_name     = ''
-        self.openrt_v_model         = None
-        self.openrt_v_token         = 0
-        self.openrt_v_use_tools     = 'no'
+        self.grok_v_enable          = False
+        self.grok_v_nick_name       = ''
+        self.grok_v_model           = None
+        self.grok_v_token           = 0
+        self.grok_v_use_tools       = 'no'
 
-        self.openrt_x_enable        = False
-        self.openrt_x_nick_name     = ''
-        self.openrt_x_model         = None
-        self.openrt_x_token         = 0
-        self.openrt_x_use_tools     = 'no'
+        self.grok_x_enable          = False
+        self.grok_x_nick_name       = ''
+        self.grok_x_model           = None
+        self.grok_x_token           = 0
+        self.grok_x_use_tools       = 'no'
 
         self.models                 = {}
         self.history                = []
@@ -111,51 +111,51 @@ class _openrtAPI:
                 pass
 
     def authenticate(self, api,
-                     openrt_api_type,
-                     openrt_default_gpt, openrt_default_class,
-                     openrt_auto_continue,
-                     openrt_max_step, openrt_max_session,
-                     openrt_max_wait_sec,
+                     grok_api_type,
+                     grok_default_gpt, grok_default_class,
+                     grok_auto_continue,
+                     grok_max_step, grok_max_session,
+                     grok_max_wait_sec,
 
-                     openrt_key_id,
+                     grok_key_id,
 
-                     openrt_a_nick_name, openrt_a_model, openrt_a_token, 
-                     openrt_a_use_tools, 
-                     openrt_b_nick_name, openrt_b_model, openrt_b_token, 
-                     openrt_b_use_tools, 
-                     openrt_v_nick_name, openrt_v_model, openrt_v_token, 
-                     openrt_v_use_tools, 
-                     openrt_x_nick_name, openrt_x_model, openrt_x_token, 
-                     openrt_x_use_tools, 
+                     grok_a_nick_name, grok_a_model, grok_a_token, 
+                     grok_a_use_tools, 
+                     grok_b_nick_name, grok_b_model, grok_b_token, 
+                     grok_b_use_tools, 
+                     grok_v_nick_name, grok_v_model, grok_v_token, 
+                     grok_v_use_tools, 
+                     grok_x_nick_name, grok_x_model, grok_x_token, 
+                     grok_x_use_tools, 
                     ):
 
         # 認証
         self.bot_auth                   = None
-        self.openrt_key_id              = openrt_key_id
+        self.grok_key_id                = grok_key_id
 
         self.client = None
-        if (openrt_key_id[:1] == '<'):
+        if (grok_key_id[:1] == '<'):
             return False
         try:
             self.client = openai.OpenAI(
-                api_key=openrt_key_id,
-                base_url="https://openrouter.ai/api/v1",
+                api_key=grok_key_id,
+                base_url="https://api.x.ai/v1",
             )
         except Exception as e:
             print(e)
             return False
 
         # 設定
-        self.openrt_default_gpt         = openrt_default_gpt
-        self.openrt_default_class       = openrt_default_class
-        if (str(openrt_auto_continue) not in ['', 'auto']):
-            self.openrt_auto_continue   = int(openrt_auto_continue)
-        if (str(openrt_max_step)      not in ['', 'auto']):
-            self.openrt_max_step        = int(openrt_max_step)
-        if (str(openrt_max_session)   not in ['', 'auto']):
-            self.openrt_max_session     = int(openrt_max_session)
-        if (str(openrt_max_wait_sec)  not in ['', 'auto']):
-            self.openrt_max_wait_sec    = int(openrt_max_wait_sec)
+        self.grok_default_gpt           = grok_default_gpt
+        self.grok_default_class         = grok_default_class
+        if (str(grok_auto_continue)   not in ['', 'auto']):
+            self.grok_auto_continue     = int(grok_auto_continue)
+        if (str(grok_max_step)        not in ['', 'auto']):
+            self.grok_max_step          = int(grok_max_step)
+        if (str(grok_max_session)     not in ['', 'auto']):
+            self.grok_max_session       = int(grok_max_session)
+        if (str(grok_max_wait_sec)    not in ['', 'auto']):
+            self.grok_max_wait_sec      = int(grok_max_wait_sec)
 
         # モデル取得
         self.models                     = {}
@@ -164,56 +164,56 @@ class _openrtAPI:
         #ymd = datetime.date.today().strftime('%Y/%m/%d')
         ymd = '????/??/??'
 
-        # openrt チャットボット
-        if (openrt_a_nick_name != ''):
-            self.openrt_a_enable        = False
-            self.openrt_a_nick_name     = openrt_a_nick_name
-            self.openrt_a_model         = openrt_a_model
-            self.openrt_a_token         = int(openrt_a_token)
-            self.openrt_a_use_tools     = openrt_a_use_tools
-            if (openrt_a_model not in self.models):
-                self.models[openrt_a_model] = {"id": openrt_a_model, "token": str(openrt_a_token), "modality": "text?", "date": ymd, }
+        # grok チャットボット
+        if (grok_a_nick_name != ''):
+            self.grok_a_enable        = False
+            self.grok_a_nick_name     = grok_a_nick_name
+            self.grok_a_model         = grok_a_model
+            self.grok_a_token         = int(grok_a_token)
+            self.grok_a_use_tools     = grok_a_use_tools
+            if (grok_a_model not in self.models):
+                self.models[grok_a_model] = {"id": grok_a_model, "token": str(grok_a_token), "modality": "text?", "date": ymd, }
 
-        if (openrt_b_nick_name != ''):
-            self.openrt_b_enable        = False
-            self.openrt_b_nick_name     = openrt_b_nick_name
-            self.openrt_b_model         = openrt_b_model
-            self.openrt_b_token         = int(openrt_b_token)
-            self.openrt_b_use_tools     = openrt_b_use_tools
-            if (openrt_b_model not in self.models):
-                self.models[openrt_b_model] = {"id": openrt_b_model, "token": str(openrt_b_token), "modality": "text?", "date": ymd, }
+        if (grok_b_nick_name != ''):
+            self.grok_b_enable        = False
+            self.grok_b_nick_name     = grok_b_nick_name
+            self.grok_b_model         = grok_b_model
+            self.grok_b_token         = int(grok_b_token)
+            self.grok_b_use_tools     = grok_b_use_tools
+            if (grok_b_model not in self.models):
+                self.models[grok_b_model] = {"id": grok_b_model, "token": str(grok_b_token), "modality": "text?", "date": ymd, }
 
-        if (openrt_v_nick_name != ''):
-            self.openrt_v_enable        = False
-            self.openrt_v_nick_name     = openrt_v_nick_name
-            self.openrt_v_model         = openrt_v_model
-            self.openrt_v_token         = int(openrt_v_token)
-            self.openrt_v_use_tools     = openrt_v_use_tools
-            if (openrt_v_model not in self.models):
-                self.models[openrt_v_model] = {"id": openrt_v_model, "token": str(openrt_v_token), "modality": "text+image?", "date": ymd, }
+        if (grok_v_nick_name != ''):
+            self.grok_v_enable        = False
+            self.grok_v_nick_name     = grok_v_nick_name
+            self.grok_v_model         = grok_v_model
+            self.grok_v_token         = int(grok_v_token)
+            self.grok_v_use_tools     = grok_v_use_tools
+            if (grok_v_model not in self.models):
+                self.models[grok_v_model] = {"id": grok_v_model, "token": str(grok_v_token), "modality": "text+image?", "date": ymd, }
 
-        if (openrt_x_nick_name != ''):
-            self.openrt_x_enable        = False
-            self.openrt_x_nick_name     = openrt_x_nick_name
-            self.openrt_x_model         = openrt_x_model
-            self.openrt_x_token         = int(openrt_x_token)
-            self.openrt_x_use_tools     = openrt_x_use_tools
-            if (openrt_x_model not in self.models):
-                self.models[openrt_x_model] = {"id": openrt_x_model, "token": str(openrt_x_token), "modality": "text+image?", "date": ymd, }
+        if (grok_x_nick_name != ''):
+            self.grok_x_enable        = False
+            self.grok_x_nick_name     = grok_x_nick_name
+            self.grok_x_model         = grok_x_model
+            self.grok_x_token         = int(grok_x_token)
+            self.grok_x_use_tools     = grok_x_use_tools
+            if (grok_x_model not in self.models):
+                self.models[grok_x_model] = {"id": grok_x_model, "token": str(grok_x_token), "modality": "text+image?", "date": ymd, }
 
         # モデル
         hit = False
-        if (self.openrt_a_model != ''):
-            self.openrt_a_enable = True
+        if (self.grok_a_model != ''):
+            self.grok_a_enable = True
             hit = True
-        if (self.openrt_b_model != ''):
-            self.openrt_b_enable = True
+        if (self.grok_b_model != ''):
+            self.grok_b_enable = True
             hit = True
-        if (self.openrt_v_model != ''):
-            self.openrt_v_enable = True
+        if (self.grok_v_model != ''):
+            self.grok_v_enable = True
             hit = True
-        if (self.openrt_x_model != ''):
-            self.openrt_x_enable = True
+        if (self.grok_x_model != ''):
+            self.grok_x_enable = True
             hit = True
 
         if (hit == True):
@@ -224,22 +224,15 @@ class _openrtAPI:
 
     def get_models(self, ):
         try:
-            headers = {
-                "Authorization": f"Bearer {self.openrt_key_id}"
-            }
-            response = requests.get("https://openrouter.ai/api/v1/models", headers=headers)
-
-            if response.status_code == 200:
-                self.models = {}
-                models = response.json()
-                for model in models['data']:
-                    key = model["id"]
-                    token = str(model["context_length"])
-                    modality = model["architecture"]["modality"]
-                    unix_timestamp = model["created"]
-                    ymd = datetime.datetime.fromtimestamp(unix_timestamp).strftime("%Y/%m/%d")
-                    #print(key, token, modality, )
-                    self.models[key] = {"id":key, "token":token, "modality":modality, "date": ymd, }
+            models = self.client.models.list()
+            self.models = {}
+            for model in models:
+                #print(model)
+                key = model.id
+                if True:
+                    ymd = datetime.datetime.fromtimestamp(model.created).strftime("%Y/%m/%d")
+                    #print(key, ymd, )
+                    self.models[key] = {"id":key, "token":"9999", "modality":"text?", "date": ymd, }
         except Exception as e:
             print(e)
             return False
@@ -252,36 +245,36 @@ class _openrtAPI:
                          x_model='', x_use_tools='', ):
         try:
             if (max_wait_sec not in ['', 'auto']):
-                if (str(max_wait_sec) != str(self.openrt_max_wait_sec)):
-                    self.openrt_max_wait_sec = int(max_wait_sec)
+                if (str(max_wait_sec) != str(self.grok_max_wait_sec)):
+                    self.grok_max_wait_sec = int(max_wait_sec)
             if (a_model != ''):
-                if (a_model != self.openrt_a_model) and (a_model in self.models):
-                    self.openrt_a_enable = True
-                    self.openrt_a_model = a_model
-                    self.openrt_a_token = int(self.models[a_model]['token'])
+                if (a_model != self.grok_a_model) and (a_model in self.models):
+                    self.grok_a_enable = True
+                    self.grok_a_model = a_model
+                    self.grok_a_token = int(self.models[a_model]['token'])
             if (a_use_tools != ''):
-                self.openrt_a_use_tools = a_use_tools
+                self.grok_a_use_tools = a_use_tools
             if (b_model != ''):
-                if (b_model != self.openrt_b_model) and (b_model in self.models):
-                    self.openrt_b_enable = True
-                    self.openrt_b_model = b_model
-                    self.openrt_b_token = int(self.models[b_model]['token'])
+                if (b_model != self.grok_b_model) and (b_model in self.models):
+                    self.grok_b_enable = True
+                    self.grok_b_model = b_model
+                    self.grok_b_token = int(self.models[b_model]['token'])
             if (b_use_tools != ''):
-                self.openrt_b_use_tools = b_use_tools
+                self.grok_b_use_tools = b_use_tools
             if (v_model != ''):
-                if (v_model != self.openrt_v_model) and (v_model in self.models):
-                    self.openrt_v_enable = True
-                    self.openrt_v_model = v_model
-                    self.openrt_v_token = int(self.models[v_model]['token'])
+                if (v_model != self.grok_v_model) and (v_model in self.models):
+                    self.grok_v_enable = True
+                    self.grok_v_model = v_model
+                    self.grok_v_token = int(self.models[v_model]['token'])
             if (v_use_tools != ''):
-                self.openrt_v_use_tools = v_use_tools
+                self.grok_v_use_tools = v_use_tools
             if (x_model != ''):
-                if (x_model != self.openrt_x_model) and (x_model in self.models):
-                    self.openrt_x_enable = True
-                    self.openrt_x_model = x_model
-                    self.openrt_x_token = int(self.models[x_model]['token'])
+                if (x_model != self.grok_x_model) and (x_model in self.models):
+                    self.grok_x_enable = True
+                    self.grok_x_model = x_model
+                    self.grok_x_token = int(self.models[x_model]['token'])
             if (x_use_tools != ''):
-                self.openrt_x_use_tools = x_use_tools
+                self.grok_x_use_tools = x_use_tools
         except Exception as e:
             print(e)
             return False
@@ -334,7 +327,7 @@ class _openrtAPI:
 
         return res_history
 
-    def history2msg_openrt(self, history=[], ):
+    def history2msg_grok(self, history=[], ):
         res_msg = []
         for h in range(len(history)):
             role    = history[h]['role']
@@ -436,14 +429,14 @@ class _openrtAPI:
             return res_text, res_path, res_name, res_api, res_history
 
         # モデル 設定
-        res_name  = self.openrt_a_nick_name
-        res_api   = self.openrt_a_model
-        use_tools = self.openrt_a_use_tools
-        if  (chat_class == 'openrt'):
-            if (self.openrt_b_enable == True):
-                res_name  = self.openrt_b_nick_name
-                res_api   = self.openrt_b_model
-                use_tools = self.openrt_b_use_tools
+        res_name  = self.grok_a_nick_name
+        res_api   = self.grok_a_model
+        use_tools = self.grok_a_use_tools
+        if  (chat_class == 'grok'):
+            if (self.grok_b_enable == True):
+                res_name  = self.grok_b_nick_name
+                res_api   = self.grok_b_model
+                use_tools = self.grok_b_use_tools
 
         # モデル 補正 (assistant)
         if ((chat_class == 'assistant') \
@@ -453,78 +446,78 @@ class _openrtAPI:
         or  (chat_class == '複雑な会話') \
         or  (chat_class == 'アシスタント') \
         or  (model_select == 'x')):
-            if (self.openrt_x_enable == True):
-                res_name  = self.openrt_x_nick_name
-                res_api   = self.openrt_x_model
-                use_tools = self.openrt_x_use_tools
+            if (self.grok_x_enable == True):
+                res_name  = self.grok_x_nick_name
+                res_api   = self.grok_x_model
+                use_tools = self.grok_x_use_tools
 
         # model 指定
-        if (self.openrt_a_nick_name != ''):
-            if (inpText.strip()[:len(self.openrt_a_nick_name)+1].lower() == (self.openrt_a_nick_name.lower() + ',')):
-                inpText = inpText.strip()[len(self.openrt_a_nick_name)+1:]
-        if (self.openrt_b_nick_name != ''):
-            if (inpText.strip()[:len(self.openrt_b_nick_name)+1].lower() == (self.openrt_b_nick_name.lower() + ',')):
-                inpText = inpText.strip()[len(self.openrt_b_nick_name)+1:]
-                if   (self.openrt_b_enable == True):
-                        res_name  = self.openrt_b_nick_name
-                        res_api   = self.openrt_b_model
-                        use_tools = self.openrt_b_use_tools
-        if (self.openrt_v_nick_name != ''):
-            if (inpText.strip()[:len(self.openrt_v_nick_name)+1].lower() == (self.openrt_v_nick_name.lower() + ',')):
-                inpText = inpText.strip()[len(self.openrt_v_nick_name)+1:]
-                if   (self.openrt_v_enable == True):
+        if (self.grok_a_nick_name != ''):
+            if (inpText.strip()[:len(self.grok_a_nick_name)+1].lower() == (self.grok_a_nick_name.lower() + ',')):
+                inpText = inpText.strip()[len(self.grok_a_nick_name)+1:]
+        if (self.grok_b_nick_name != ''):
+            if (inpText.strip()[:len(self.grok_b_nick_name)+1].lower() == (self.grok_b_nick_name.lower() + ',')):
+                inpText = inpText.strip()[len(self.grok_b_nick_name)+1:]
+                if   (self.grok_b_enable == True):
+                        res_name  = self.grok_b_nick_name
+                        res_api   = self.grok_b_model
+                        use_tools = self.grok_b_use_tools
+        if (self.grok_v_nick_name != ''):
+            if (inpText.strip()[:len(self.grok_v_nick_name)+1].lower() == (self.grok_v_nick_name.lower() + ',')):
+                inpText = inpText.strip()[len(self.grok_v_nick_name)+1:]
+                if   (self.grok_v_enable == True):
                     if  (len(image_urls) > 0) \
                     and (len(image_urls) == len(upload_files)):
-                        res_name  = self.openrt_v_nick_name
-                        res_api   = self.openrt_v_model
-                        use_tools = self.openrt_v_use_tools
-                elif (self.openrt_x_enable == True):
-                        res_name  = self.openrt_x_nick_name
-                        res_api   = self.openrt_x_model
-                        use_tools = self.openrt_x_use_tools
-        if (self.openrt_x_nick_name != ''):
-            if (inpText.strip()[:len(self.openrt_x_nick_name)+1].lower() == (self.openrt_x_nick_name.lower() + ',')):
-                inpText = inpText.strip()[len(self.openrt_x_nick_name)+1:]
-                if   (self.openrt_x_enable == True):
-                        res_name  = self.openrt_x_nick_name
-                        res_api   = self.openrt_x_model
-                        use_tools = self.openrt_x_use_tools
-                elif (self.openrt_b_enable == True):
-                        res_name  = self.openrt_b_nick_name
-                        res_api   = self.openrt_b_model
-                        use_tools = self.openrt_b_use_tools
+                        res_name  = self.grok_v_nick_name
+                        res_api   = self.grok_v_model
+                        use_tools = self.grok_v_use_tools
+                elif (self.grok_x_enable == True):
+                        res_name  = self.grok_x_nick_name
+                        res_api   = self.grok_x_model
+                        use_tools = self.grok_x_use_tools
+        if (self.grok_x_nick_name != ''):
+            if (inpText.strip()[:len(self.grok_x_nick_name)+1].lower() == (self.grok_x_nick_name.lower() + ',')):
+                inpText = inpText.strip()[len(self.grok_x_nick_name)+1:]
+                if   (self.grok_x_enable == True):
+                        res_name  = self.grok_x_nick_name
+                        res_api   = self.grok_x_model
+                        use_tools = self.grok_x_use_tools
+                elif (self.grok_b_enable == True):
+                        res_name  = self.grok_b_nick_name
+                        res_api   = self.grok_b_model
+                        use_tools = self.grok_b_use_tools
         if   (inpText.strip()[:5].lower() == ('riki,')):
             inpText = inpText.strip()[5:]
-            if   (self.openrt_x_enable == True):
-                        res_name  = self.openrt_x_nick_name
-                        res_api   = self.openrt_x_model
-                        use_tools = self.openrt_x_use_tools
-            elif (self.openrt_b_enable == True):
-                        res_name  = self.openrt_b_nick_name
-                        res_api   = self.openrt_b_model
-                        use_tools = self.openrt_b_use_tools
+            if   (self.grok_x_enable == True):
+                        res_name  = self.grok_x_nick_name
+                        res_api   = self.grok_x_model
+                        use_tools = self.grok_x_use_tools
+            elif (self.grok_b_enable == True):
+                        res_name  = self.grok_b_nick_name
+                        res_api   = self.grok_b_model
+                        use_tools = self.grok_b_use_tools
         elif (inpText.strip()[:7].lower() == ('vision,')):
             inpText = inpText.strip()[7:]
-            if   (self.openrt_v_enable == True):
+            if   (self.grok_v_enable == True):
                 if  (len(image_urls) > 0) \
                 and (len(image_urls) == len(upload_files)):
-                        res_name  = self.openrt_v_nick_name
-                        res_api   = self.openrt_v_model
-                        use_tools = self.openrt_v_use_tools
-            elif (self.openrt_x_enable == True):
-                        res_name  = self.openrt_x_nick_name
-                        res_api   = self.openrt_x_model
-                        use_tools = self.openrt_x_use_tools
+                        res_name  = self.grok_v_nick_name
+                        res_api   = self.grok_v_model
+                        use_tools = self.grok_v_use_tools
+            elif (self.grok_x_enable == True):
+                        res_name  = self.grok_x_nick_name
+                        res_api   = self.grok_x_model
+                        use_tools = self.grok_x_use_tools
         elif (inpText.strip()[:10].lower() == ('assistant,')):
             inpText = inpText.strip()[10:]
-            if   (self.openrt_x_enable == True):
-                        res_name  = self.openrt_x_nick_name
-                        res_api   = self.openrt_x_model
-                        use_tools = self.openrt_x_use_tools
-            elif (self.openrt_b_enable == True):
-                        res_name  = self.openrt_b_nick_name
-                        res_api   = self.openrt_b_model
-                        use_tools = self.openrt_b_use_tools
+            if   (self.grok_x_enable == True):
+                        res_name  = self.grok_x_nick_name
+                        res_api   = self.grok_x_model
+                        use_tools = self.grok_x_use_tools
+            elif (self.grok_b_enable == True):
+                        res_name  = self.grok_b_nick_name
+                        res_api   = self.grok_b_model
+                        use_tools = self.grok_b_use_tools
         elif (inpText.strip()[:7].lower() == ('openai,')):
             inpText = inpText.strip()[7:]
         elif (inpText.strip()[:6].lower() == ('azure,')):
@@ -541,7 +534,7 @@ class _openrtAPI:
             inpText = inpText.strip()[7:]
         elif (inpText.strip()[:11].lower() == ('openrouter,')):
             inpText = inpText.strip()[11:]
-        elif (inpText.strip()[:7].lower() == ('openrt,')):
+        elif (inpText.strip()[:7].lower() == ('grok,')):
             inpText = inpText.strip()[7:]
         elif (inpText.strip()[:11].lower() == ('perplexity,')):
             inpText = inpText.strip()[11:]
@@ -556,27 +549,27 @@ class _openrtAPI:
 
         # モデル 未設定時
         if (res_api is None):
-            res_name  = self.openrt_a_nick_name
-            res_api   = self.openrt_a_model
-            use_tools = self.openrt_a_use_tools
-            if (self.openrt_b_enable == True):
+            res_name  = self.grok_a_nick_name
+            res_api   = self.grok_a_model
+            use_tools = self.grok_a_use_tools
+            if (self.grok_b_enable == True):
                 if (len(upload_files) > 0) \
                 or (len(inpText) > 1000):
-                    res_name  = self.openrt_b_nick_name
-                    res_api   = self.openrt_b_model
-                    use_tools = self.openrt_b_use_tools
+                    res_name  = self.grok_b_nick_name
+                    res_api   = self.grok_b_model
+                    use_tools = self.grok_b_use_tools
 
         # モデル 補正 (vision)
         if  (len(image_urls) > 0) \
         and (len(image_urls) == len(upload_files)):
-            if   (self.openrt_v_enable == True):
-                res_name  = self.openrt_v_nick_name
-                res_api   = self.openrt_v_model
-                use_tools = self.openrt_v_use_tools
-            elif (self.openrt_x_enable == True):
-                res_name  = self.openrt_x_nick_name
-                res_api   = self.openrt_x_model
-                use_tools = self.openrt_x_use_tools
+            if   (self.grok_v_enable == True):
+                res_name  = self.grok_v_nick_name
+                res_api   = self.grok_v_model
+                use_tools = self.grok_v_use_tools
+            elif (self.grok_x_enable == True):
+                res_name  = self.grok_x_nick_name
+                res_api   = self.grok_x_model
+                use_tools = self.grok_x_use_tools
 
         # history 追加・圧縮 (古いメッセージ)
         res_history = self.history_add(history=res_history, sysText=sysText, reqText=reqText, inpText=inpText, )
@@ -584,7 +577,7 @@ class _openrtAPI:
 
         # メッセージ作成
         if (model_select != 'v'):
-            msg = self.history2msg_openrt(history=res_history, )
+            msg = self.history2msg_grok(history=res_history, )
         else:
             msg = self.history2msg_vision(history=res_history, image_urls=image_urls,)
 
@@ -625,14 +618,14 @@ class _openrtAPI:
                 self.print(session_id, f" OpenRT : { res_name.lower() }, { res_api }, pass={ n }, ")
 
                 # 画像指定
-                if   (res_name == self.openrt_v_nick_name) and (len(image_urls) > 0):
+                if   (res_name == self.grok_v_nick_name) and (len(image_urls) > 0):
                     null_history = self.history_add(history=[], sysText=sysText, reqText=reqText, inpText=inpText, )
                     msg = self.history2msg_vision(history=null_history, image_urls=image_urls,)
                     response = self.client.chat.completions.create(
                             model           = res_api,
                             messages        = msg,
                             temperature     = float(temperature),
-                            timeout         = self.openrt_max_wait_sec, 
+                            timeout         = self.grok_max_wait_sec, 
                             stream          = stream, 
                             )
 
@@ -643,7 +636,7 @@ class _openrtAPI:
                             messages        = msg,
                             temperature     = float(temperature),
                             tools           = tools, tool_choice = 'auto',
-                            timeout         = self.openrt_max_wait_sec,
+                            timeout         = self.grok_max_wait_sec,
                             stream          = stream, 
                             )
 
@@ -654,7 +647,7 @@ class _openrtAPI:
                             model           = res_api,
                             messages        = msg,
                             temperature     = float(temperature),
-                            timeout         = self.openrt_max_wait_sec,
+                            timeout         = self.grok_max_wait_sec,
                             stream          = stream, 
                             )
                     else:
@@ -669,7 +662,7 @@ class _openrtAPI:
                                 model           = res_api,
                                 messages        = msg,
                                 temperature     = float(temperature),
-                                timeout         = self.openrt_max_wait_sec, 
+                                timeout         = self.grok_max_wait_sec, 
                                 response_format = { "type": "json_object" },
                                 stream          = stream, 
                                 )
@@ -679,7 +672,7 @@ class _openrtAPI:
                                 model           = res_api,
                                 messages        = msg,
                                 temperature     = float(temperature),
-                                timeout         = self.openrt_max_wait_sec, 
+                                timeout         = self.grok_max_wait_sec, 
                                 response_format = { "type": "json_schema", "json_schema": schema },
                                 stream          = stream, 
                                 )
@@ -689,7 +682,7 @@ class _openrtAPI:
 
                     chkTime     = time.time()
                     for chunk in response:
-                        if ((time.time() - chkTime) > self.openrt_max_wait_sec):
+                        if ((time.time() - chkTime) > self.grok_max_wait_sec):
                             break
                         delta   = chunk.choices[0].delta
                         if (delta is not None):
@@ -874,7 +867,7 @@ class _openrtAPI:
         #nick_name  = 'auto'
         #model_name = 'auto'
 
-        # openrt
+        # grok
         res_text, res_path, res_files, nick_name, model_name, res_history = \
         self.run_gpt(   chat_class=chat_class, model_select=model_select,
                         nick_name=nick_name, model_name=model_name,
@@ -893,30 +886,30 @@ class _openrtAPI:
 
 if __name__ == '__main__':
 
-        #openrtAPI = speech_bot_openrt._openrtAPI()
-        openrtAPI = _openrtAPI()
+        #grokAPI = speech_bot_grok._grokAPI()
+        grokAPI = _grokAPI()
 
-        api_type = openrt_key.getkey('openrt','openrt_api_type')
+        api_type = grok_key.getkey('grok','grok_api_type')
         print(api_type)
 
         log_queue = queue.Queue()
-        res = openrtAPI.init(log_queue=log_queue, )
+        res = grokAPI.init(log_queue=log_queue, )
 
-        res = openrtAPI.authenticate('openrt',
+        res = grokAPI.authenticate('grok',
                             api_type,
-                            openrt_key.getkey('openrt','openrt_default_gpt'), openrt_key.getkey('openrt','openrt_default_class'),
-                            openrt_key.getkey('openrt','openrt_auto_continue'),
-                            openrt_key.getkey('openrt','openrt_max_step'), openrt_key.getkey('openrt','openrt_max_session'),
-                            openrt_key.getkey('openrt','openrt_max_wait_sec'),
-                            openrt_key.getkey('openrt','openrt_key_id'),
-                            openrt_key.getkey('openrt','openrt_a_nick_name'), openrt_key.getkey('openrt','openrt_a_model'), openrt_key.getkey('openrt','openrt_a_token'),
-                            openrt_key.getkey('openrt','openrt_a_use_tools'),
-                            openrt_key.getkey('openrt','openrt_b_nick_name'), openrt_key.getkey('openrt','openrt_b_model'), openrt_key.getkey('openrt','openrt_b_token'),
-                            openrt_key.getkey('openrt','openrt_b_use_tools'),
-                            openrt_key.getkey('openrt','openrt_v_nick_name'), openrt_key.getkey('openrt','openrt_v_model'), openrt_key.getkey('openrt','openrt_v_token'),
-                            openrt_key.getkey('openrt','openrt_v_use_tools'),
-                            openrt_key.getkey('openrt','openrt_x_nick_name'), openrt_key.getkey('openrt','openrt_x_model'), openrt_key.getkey('openrt','openrt_x_token'),
-                            openrt_key.getkey('openrt','openrt_x_use_tools'),
+                            grok_key.getkey('grok','grok_default_gpt'), grok_key.getkey('grok','grok_default_class'),
+                            grok_key.getkey('grok','grok_auto_continue'),
+                            grok_key.getkey('grok','grok_max_step'), grok_key.getkey('grok','grok_max_session'),
+                            grok_key.getkey('grok','grok_max_wait_sec'),
+                            grok_key.getkey('grok','grok_key_id'),
+                            grok_key.getkey('grok','grok_a_nick_name'), grok_key.getkey('grok','grok_a_model'), grok_key.getkey('grok','grok_a_token'),
+                            grok_key.getkey('grok','grok_a_use_tools'),
+                            grok_key.getkey('grok','grok_b_nick_name'), grok_key.getkey('grok','grok_b_model'), grok_key.getkey('grok','grok_b_token'),
+                            grok_key.getkey('grok','grok_b_use_tools'),
+                            grok_key.getkey('grok','grok_v_nick_name'), grok_key.getkey('grok','grok_v_model'), grok_key.getkey('grok','grok_v_token'),
+                            grok_key.getkey('grok','grok_v_use_tools'),
+                            grok_key.getkey('grok','grok_x_nick_name'), grok_key.getkey('grok','grok_x_model'), grok_key.getkey('grok','grok_x_token'),
+                            grok_key.getkey('grok','grok_x_use_tools'),
                             )
         print('authenticate:', res, )
         if (res == True):
@@ -946,9 +939,9 @@ if __name__ == '__main__':
                 print('[Request]')
                 print(reqText, inpText )
                 print()
-                res_text, res_path, res_files, res_name, res_api, openrtAPI.history = \
-                    openrtAPI.chatBot(  chat_class='auto', model_select='auto', 
-                                        session_id='admin', history=openrtAPI.history, function_modules=function_modules,
+                res_text, res_path, res_files, res_name, res_api, grokAPI.history = \
+                    grokAPI.chatBot(  chat_class='auto', model_select='auto', 
+                                        session_id='admin', history=grokAPI.history, function_modules=function_modules,
                                         sysText=sysText, reqText=reqText, inpText=inpText, filePath=filePath,
                                         inpLang='ja', outLang='ja', )
                 print()
@@ -959,14 +952,14 @@ if __name__ == '__main__':
             if True:
                 sysText = None
                 reqText = ''
-                inpText = 'ort-b,toolsで兵庫県三木市の天気を調べて'
+                inpText = 'grok-b,toolsで兵庫県三木市の天気を調べて'
                 print()
                 print('[Request]')
                 print(reqText, inpText )
                 print()
-                res_text, res_path, res_files, res_name, res_api, openrtAPI.history = \
-                    openrtAPI.chatBot(  chat_class='auto', model_select='auto', 
-                                        session_id='admin', history=openrtAPI.history, function_modules=function_modules,
+                res_text, res_path, res_files, res_name, res_api, grokAPI.history = \
+                    grokAPI.chatBot(  chat_class='auto', model_select='auto', 
+                                        session_id='admin', history=grokAPI.history, function_modules=function_modules,
                                         sysText=sysText, reqText=reqText, inpText=inpText, filePath=filePath,
                                         inpLang='ja', outLang='ja', )
                 print()
@@ -984,9 +977,9 @@ if __name__ == '__main__':
                 print('[Request]')
                 print(reqText, inpText )
                 print()
-                res_text, res_path, res_files, res_name, res_api, openrtAPI.history = \
-                    openrtAPI.chatBot(  chat_class='auto', model_select='auto', 
-                                        session_id='admin', history=openrtAPI.history, function_modules=function_modules,
+                res_text, res_path, res_files, res_name, res_api, grokAPI.history = \
+                    grokAPI.chatBot(  chat_class='auto', model_select='auto', 
+                                        session_id='admin', history=grokAPI.history, function_modules=function_modules,
                                         sysText=sysText, reqText=reqText, inpText=inpText, filePath=filePath,
                                         inpLang='ja', outLang='ja', )
                 print()
@@ -996,9 +989,9 @@ if __name__ == '__main__':
 
             if False:
                 print('[History]')
-                for h in range(len(openrtAPI.history)):
-                    print(openrtAPI.history[h])
-                openrtAPI.history = []
+                for h in range(len(grokAPI.history)):
+                    print(grokAPI.history[h])
+                grokAPI.history = []
 
 
 
