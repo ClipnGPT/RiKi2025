@@ -1971,10 +1971,15 @@ class ChatBotAPI:
                         content   = msg_text, )
 
         # メッセージ生成
-        res = self.client_x.beta.threads.messages.create(
+        content_text = ''
+        if (reqText is not None) and (reqText.strip() != ''):
+            content_text += reqText.rstrip() + '\n'
+        if (inpText is not None) and (inpText.strip() != ''):
+            content_text += inpText.rstrip() + '\n'
+        res = self.client.beta.threads.messages.create(
             thread_id = my_thread_id,
             role      = 'user',
-            content   = inpText, )
+            content   = content_text, )
 
         # ストリーム実行?
         if (session_id == 'admin'):
@@ -2578,10 +2583,13 @@ Respond according to the following criteria:
 
         if (sysText is None) or (sysText == ''):
             sysText = 'あなたは美しい日本語を話す賢いアシスタントです。'
+        if (inpText is None) or (inpText == ''):
+            inpText = reqText
+            reqText = None
 
         if (self.bot_auth is None):
             self.print(session_id, 'ChatGPT: Not Authenticate Error !')
-            return res_text, res_path, nick_name, model_name, res_history
+            return res_text, res_path, res_files, nick_name, model_name, res_history
 
         # ファイル分離
         upload_files    = []
