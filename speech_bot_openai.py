@@ -1976,7 +1976,7 @@ class ChatBotAPI:
             content_text += reqText.rstrip() + '\n'
         if (inpText is not None) and (inpText.strip() != ''):
             content_text += inpText.rstrip() + '\n'
-        res = self.client.beta.threads.messages.create(
+        res = self.client_x.beta.threads.messages.create(
             thread_id = my_thread_id,
             role      = 'user',
             content   = content_text, )
@@ -2476,7 +2476,7 @@ Respond according to the following criteria:
 
             # GPT
             n += 1
-            self.print(session_id, f" Assistant : { res_name.lower() }, { model_name }, pass={ n }, ")
+            self.print(session_id, f" Assistant : { nick_name.lower() }, { model_name }, pass={ n }, ")
 
             # Assistant
             res_text2, res_path2, res_files2, nick_name, model_name, res_history = \

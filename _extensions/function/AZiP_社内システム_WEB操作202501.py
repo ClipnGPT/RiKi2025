@@ -43,7 +43,7 @@ class _class:
 """
 この機能は、社内システム(WEB) 出退勤,日報,掲示板 の操作専用の機能です。
 ログイン,出勤,退勤の操作が実行できます。
-この機能から、自律的にブラウザ操作が可能なAIエージェント WebAgent(ウェブエージェント: webBrowser_operation_agent ) に操作指示して実行します。
+この機能から、自律的にブラウザ操作が可能なAIエージェント Web-Agent(ウェブエージェント: webBrowser_operation_agent ) に操作指示して実行します。
 """,
             "parameters": {
                 "type": "object",
@@ -106,7 +106,7 @@ class _class:
             res = io_text_write(filename=qIO_func2py, text=req_dump, )
             if (res == True):
                 res_okng = 'ok'
-                res_msg  = f"AIエージェント WebAgent(ウェブエージェント) に、社内システム({ system_name })の{ operation }操作を依頼しました。\n" 
+                res_msg  = f"AIエージェント Web-Agent(ウェブエージェント) に、社内システム({ system_name })の{ operation }操作を依頼しました。\n" 
                 res_msg += 'しばらくお待ちください。\n'
 
         # JSON化

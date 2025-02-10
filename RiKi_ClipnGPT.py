@@ -220,6 +220,16 @@ if __name__ == '__main__':
         conf.init(qLog_fn=qLog_fn, runMode=runMode, 
                   cgpt_screen=p_screen, cgpt_panel=p_panel, cgpt_alpha=p_alpha, )
         
+        # 環境変数設定
+        if  (conf.openai_organization[:1] != '<'):
+            os.environ['OPENAI_ORGANIZATION'] = conf.openai_organization
+        if  (conf.openai_key_id[:1] != '<'):
+            os.environ['OPENAI_API_KEY'] = conf.openai_key_id
+        if  (conf.freeai_key_id[:1] != '<'):
+            os.environ['FREEAI_API_KEY'] = conf.freeai_key_id
+            os.environ['GOOGLE_API_KEY'] = conf.freeai_key_id
+            os.environ['REACT_APP_GEMINI_API_KEY'] = conf.freeai_key_id
+
         # 実行優先設定
         nice = conf.run_priority
         if (nice == 'auto'):
