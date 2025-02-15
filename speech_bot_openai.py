@@ -1562,10 +1562,10 @@ class ChatBotAPI:
 
                     vector_store = self.client_x.beta.vector_stores.create(
                                         name = assistant_name,
-                                        expires_after = {
-                                        "anchor": "last_active_at",
-                                        "days": 2
-                                        }
+                                        #expires_after = {
+                                        #"anchor": "last_active_at",
+                                        #"days": 2
+                                        #}
                                     )
 
                     file_batch = self.client_x.beta.vector_stores.file_batches.create_and_poll(
