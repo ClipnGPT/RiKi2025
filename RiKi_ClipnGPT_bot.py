@@ -846,7 +846,7 @@ class _bot:
         return upload_files, image_urls
 
     def model_check(self, chat_class='auto', model_select='auto',
-                    session_id='internal', history=[], function_modules=[],
+                    session_id='internal', history=[], function_modules={},
                     sysText=None, reqText=None, inpText='こんにちは', 
                     upload_files=[], image_urls=[], ):
 
@@ -1263,7 +1263,7 @@ class _bot:
                 wk_json, wk_path, wk_files, wk_nick_name, wk_model_name, _ = \
                 self.freeaiAPI.run_gpt( chat_class='internal', model_select='a',
                                         nick_name=None, model_name=None, 
-                                        session_id='internal', history=[], function_modules=[],
+                                        session_id='internal', history=[], function_modules={},
                                         sysText=wk_sysText, reqText=wk_reqText, inpText=wk_inpText,
                                         upload_files=[], image_urls=[],
                                         jsonSchema=wk_jsonSchema, )
@@ -1276,7 +1276,7 @@ class _bot:
                 wk_json, wk_path, wk_files, wk_nick_name, wk_model_name, _ = \
                 self.ollamaAPI.run_gpt( chat_class='internal', model_select='a',
                                         nick_name=None, model_name=None, 
-                                        session_id='internal', history=[], function_modules=[],
+                                        session_id='internal', history=[], function_modules={},
                                         sysText=wk_sysText, reqText=wk_reqText, inpText=wk_inpText,
                                         upload_files=[], image_urls=[],
                                         jsonSchema=wk_jsonSchema, )
@@ -1289,7 +1289,7 @@ class _bot:
                 wk_json, wk_path, wk_files, wk_nick_name, wk_model_name, _ = \
                 self.openaiAPI.run_gpt( chat_class='internal', model_select='auto',
                                         nick_name=None, model_name=None, 
-                                        session_id='internal', history=[], function_modules=[],
+                                        session_id='internal', history=[], function_modules={},
                                         sysText=wk_sysText, reqText=wk_reqText, inpText=wk_inpText,
                                         upload_files=[], image_urls=[],
                                         jsonSchema=wk_jsonSchema, )
@@ -1368,7 +1368,7 @@ class _bot:
         return chat_class, model_select, nick_name, model_name, res_engine
 
     def chatBot(self, chat_class='auto', model_select='auto',
-                session_id='admin', history=[], function_modules=[],
+                session_id='admin', history=[], function_modules={},
                 sysText=None, reqText=None, inpText='こんにちは', 
                 filePath=[],
                 temperature=0.8, max_step=10, inpLang='ja-JP', outLang='ja-JP', ):
@@ -1397,7 +1397,7 @@ class _bot:
             run_engine = 'auto'
             chat_class, model_select, nick_name, model_name, run_engine = \
             self.model_check(   chat_class=chat_class, model_select=model_select, 
-                                session_id='internal', history=[], function_modules=[], 
+                                session_id='internal', history=[], function_modules={}, 
                                 sysText=sysText, reqText=reqText, inpText=inpText, 
                                 upload_files=upload_files, image_urls=image_urls, )
         except Exception as e:
@@ -1506,10 +1506,10 @@ if __name__ == '__main__':
 
     # ロード
     chatbot.gpt_functions_load()
-    function_modules = []
-    for module_dic in chatbot.botFunc.function_modules:
+    function_modules = {}
+    for key, module_dic in chatbot.botFunc.function_modules.items():
         if (module_dic['onoff'] == 'on'):
-            function_modules.append(module_dic)
+            function_modules[key] = module_dic
 
     # openai テスト
     if True:

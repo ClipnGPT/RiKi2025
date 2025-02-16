@@ -99,7 +99,6 @@ class _addin:
                         ext_module = loader.load_module()
                         ext_onoff  = 'off'
                         ext_class  = ext_module._class()
-                        print('Addins    Loading ... "' + ext_script + '" (' + ext_class.func_name + ') _class.func_proc')
                         ext_version     = ext_class.version
                         ext_func_name   = ext_class.func_name
                         ext_func_ver    = ext_class.func_ver
@@ -158,6 +157,7 @@ class _addin:
                             module_dic['func_reset'] = ext_func_reset
                             module_dic['func_proc']  = ext_func_proc
                             self.addin_modules[ext_script] = module_dic
+                            print('Addins    Loading ... "' + ext_script + '" (' + ext_class.func_name + ') ' + ext_onoff + '. ')
 
                             if   (ext_script == 'addin_directive'):
                                 self.addin_directive    = ext_func_proc
@@ -183,10 +183,10 @@ class _addin:
             ext_script     = module_dic['script']
             ext_func_name  = module_dic['func_name']
             ext_func_reset = module_dic['func_reset']
-            print('Addins    Reset   ... "' + ext_script + '" (' + ext_func_name + ') _class.func_reset')
             try:
                 res = False
                 res = ext_func_reset()
+                print('Addins    Reset   ... "' + ext_script + '" (' + ext_func_name + ') OK. ')
             except:
                 pass
             if (res == False):
@@ -207,12 +207,12 @@ class _addin:
             ext_module    = module_dic['module']
             ext_class     = module_dic['class']
             ext_func_proc = module_dic['func_proc']
-            print('Addins    Unload  ... "' + ext_script + '" (' + ext_func_name + ') _class.func_proc')
 
             try:
                 #del ext_func_proc
                 del ext_class
                 del ext_module
+                print('Addins    Unload  ... "' + ext_script + '" (' + ext_func_name + ') OK. ')
             except:
                 res_unload_all = False
                 res_unload_msg += ext_func_name + 'の開放中にエラーがありました。' + '\n'

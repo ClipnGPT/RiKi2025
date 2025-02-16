@@ -778,10 +778,10 @@ class _proc:
                     if (len(file_path) > 0):
                         print(' Attach files ...', file_path)
 
-                    function_modules = []
-                    for module_dic in self.chatbot.botFunc.function_modules:
+                    function_modules = {}
+                    for key, module_dic in self.chatbot.botFunc.function_modules.items():
                         if (module_dic['onoff'] == 'on'):
-                            function_modules.append(module_dic)
+                            function_modules[key] = module_dic
 
                     # chatbot
                     text, res_path, res_files, res_name, res_api, res_history = \

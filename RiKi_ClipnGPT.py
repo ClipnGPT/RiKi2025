@@ -562,7 +562,7 @@ if __name__ == '__main__':
 
             # 拡張ファンクション Tree
             func_tree = gui.get_sg_TreeData()
-            for module_dic in bot.botFunc.function_modules:
+            for module_dic in bot.botFunc.function_modules.values():
                 onoff       = module_dic['onoff']
                 name        = module_dic['script'] + ' (' + module_dic['func_name'] + ')'
                 ver         = module_dic['func_ver']
@@ -1399,7 +1399,7 @@ if __name__ == '__main__':
                         gui.popup_text(title='Attension', text=msg, auto_close=False, size=(60,12), )
                 # Tree
                 func_tree = gui.get_sg_TreeData()
-                for module_dic in bot.botFunc.function_modules:
+                for module_dic in bot.botFunc.function_modules.values():
                     onoff       = module_dic['onoff']
                     name        = module_dic['script'] + ' (' + module_dic['func_name'] + ')'
                     ver         = module_dic['func_ver']
@@ -1472,20 +1472,20 @@ if __name__ == '__main__':
                     gui.window['_function_tree_'].metadata.remove(func_name)
                     gui.window['_function_tree_'].update(key=func_name, icon=gui.check_box[0])
                     script_name = func_name[:func_name.find(' ')]
-                    for m in range(len(bot.botFunc.function_modules)):
-                        module_dic = bot.botFunc.function_modules[m]
+                    for key in bot.botFunc.function_modules.keys():
+                        module_dic = bot.botFunc.function_modules[key]
                         if (script_name == module_dic['script']):
                             module_dic['onoff'] = 'off'
-                            bot.botFunc.function_modules[m] = module_dic
+                            bot.botFunc.function_modules[key] = module_dic
                 else:
                     gui.window['_function_tree_'].metadata.append(func_name)
                     gui.window['_function_tree_'].update(key=func_name, icon=gui.check_box[1])
                     script_name = func_name[:func_name.find(' ')]
-                    for m in range(len(bot.botFunc.function_modules)):
-                        module_dic = bot.botFunc.function_modules[m]
+                    for key in bot.botFunc.function_modules.keys():
+                        module_dic = bot.botFunc.function_modules[key]
                         if (script_name == module_dic['script']):
                             module_dic['onoff'] = 'on'
-                            bot.botFunc.function_modules[m] = module_dic
+                            bot.botFunc.function_modules[key] = module_dic
 
             elif (event == '_sendfile_tree_'):
                 send_file = values['_sendfile_tree_'][0]
