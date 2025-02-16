@@ -549,7 +549,7 @@ class _bot:
         if  (self.freeai_max_session != ''):
             freeai_max_session = self.freeai_max_session
 
-        freeai_max_wait_sec  = ollama_key.getkey('ollama','freeai_max_wait_sec')
+        freeai_max_wait_sec  = freeai_key.getkey('freeai','freeai_max_wait_sec')
         if  (self.freeai_max_wait_sec != ''):
             freeai_max_wait_sec = self.freeai_max_wait_sec
 
@@ -1211,12 +1211,12 @@ class _bot:
 
             # 拡張アドイン エンジン選択(1)
             if (self.addin is not None):
-                ext_module = self.addin.addin_modules.get('addin_engine_selector', None)
-                if (ext_module is not None):
+                addin_module = self.addin.addin_modules.get('addin_engine_selector', None)
+                if (addin_module is not None):
 
                     res_json = None
                     try:
-                        if (ext_module['onoff'] == 'on'):
+                        if (addin_module['onoff'] == 'on'):
                             dic = {}
                             dic['runStep']           = '1'
                             dic['openai_exec']       = str(self.openai_exec)
@@ -1232,7 +1232,7 @@ class _bot:
                             dic['step1_inpText']     = inpText
                             json_dump = json.dumps(dic, ensure_ascii=False, )
 
-                            func_proc = ext_module['func_proc']
+                            func_proc = addin_module['func_proc']
                             res_json  = func_proc(json_dump)
                     except Exception as e:
                         print(e)
@@ -1319,12 +1319,12 @@ class _bot:
         # 拡張アドイン エンジン選択(2)
         new_class = chat_class
         if (self.addin is not None):
-            ext_module = self.addin.addin_modules.get('addin_engine_selector', None)
-            if (ext_module is not None):
+            addin_module = self.addin.addin_modules.get('addin_engine_selector', None)
+            if (addin_module is not None):
 
                     res_json = None
                     try:
-                        if (ext_module['onoff'] == 'on'):
+                        if (addin_module['onoff'] == 'on'):
                             dic = {}
                             dic['runStep']           = '2'
                             dic['openai_exec']       = str(self.openai_exec)
@@ -1339,7 +1339,7 @@ class _bot:
                             dic['step2_class']       = chat_class
                             json_dump = json.dumps(dic, ensure_ascii=False, )
 
-                            func_proc = ext_module['func_proc']
+                            func_proc = addin_module['func_proc']
                             res_json  = func_proc(json_dump)
                     except Exception as e:
                         print(e)

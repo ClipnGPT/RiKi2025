@@ -418,11 +418,11 @@ class _proc:
                 json_dump = json.dumps(dic, ensure_ascii=False, )
 
                 res_json = None
-                ext_module = self.addin.addin_modules.get('addin_ocr', None)
-                if (ext_module is not None):
+                addin_module = self.addin.addin_modules.get('addin_ocr', None)
+                if (addin_module is not None):
                     try:
-                        if (ext_module['onoff'] == 'on'):
-                            #func_proc = ext_module['func_proc']
+                        if (addin_module['onoff'] == 'on'):
+                            #func_proc = addin_module['func_proc']
                             #res_json  = func_proc(json_dump)
                             res_json  = self.addin.addin_ocr(json_dump)
                     except:
@@ -564,11 +564,11 @@ class _proc:
                 json_dump = json.dumps(dic, ensure_ascii=False, )
 
                 res_json = None
-                ext_module = self.addin.addin_modules.get('addin_url', None)
-                if (ext_module is not None):
+                addin_module = self.addin.addin_modules.get('addin_url', None)
+                if (addin_module is not None):
                     try:
-                        if (ext_module['onoff'] == 'on'):
-                            #func_proc = ext_module['func_proc']
+                        if (addin_module['onoff'] == 'on'):
+                            #func_proc = addin_module['func_proc']
                             #res_json  = func_proc(json_dump)
                             res_json  = self.addin.addin_url(json_dump)
                     except:
@@ -657,11 +657,11 @@ class _proc:
                     json_dump = json.dumps(dic, ensure_ascii=False, )
 
                     res_json = None
-                    ext_module = self.addin.addin_modules.get('addin_pdf', None)
-                    if (ext_module is not None):
+                    addin_module = self.addin.addin_modules.get('addin_pdf', None)
+                    if (addin_module is not None):
                         try:
-                            if (ext_module['onoff'] == 'on'):
-                                #func_proc = ext_module['func_proc']
+                            if (addin_module['onoff'] == 'on'):
+                                #func_proc = addin_module['func_proc']
                                 #res_json  = func_proc(json_dump)
                                 res_json  = self.addin.addin_pdf(json_dump)
                         except:

@@ -348,38 +348,38 @@ if __name__ == '__main__':
         if (bot.ollama_enable != True):
             gui.window['_check_ollama_'].update(False, visible=False)
 
-        ext_module = addin.addin_modules.get('addin_pdf', None)
-        if (ext_module is None):
+        addin_module = addin.addin_modules.get('addin_pdf', None)
+        if (addin_module is None):
             gui.window['_check_pdfParser_'].update(False, visible=False)
         else:
-            if (ext_module['onoff'] == 'on'):
+            if (addin_module['onoff'] == 'on'):
                 gui.window['_check_pdfParser_'].update(True)
             else:
                 gui.window['_check_pdfParser_'].update(False)
 
-        ext_module = addin.addin_modules.get('addin_url', None)
-        if (ext_module is None):
+        addin_module = addin.addin_modules.get('addin_url', None)
+        if (addin_module is None):
             gui.window['_check_htmlParser_'].update(False, visible=False)
         else:
-            if (ext_module['onoff'] == 'on'):
+            if (addin_module['onoff'] == 'on'):
                 gui.window['_check_htmlParser_'].update(True)
             else:
                 gui.window['_check_htmlParser_'].update(False)
 
-        ext_module = addin.addin_modules.get('addin_ocr', None)
-        if (ext_module is None):
+        addin_module = addin.addin_modules.get('addin_ocr', None)
+        if (addin_module is None):
             gui.window['_check_imageOCR_'].update(False, visible=False)
         else:
-            #if (ext_module['onoff'] == 'on'):
+            #if (addin_module['onoff'] == 'on'):
             #    gui.window['_check_imageOCR_'].update(True)
             #else:
             gui.window['_check_imageOCR_'].update(False)
 
-        ext_module = addin.addin_modules.get('addin_autoSandbox', None)
-        if (ext_module is None):
+        addin_module = addin.addin_modules.get('addin_autoSandbox', None)
+        if (addin_module is None):
             gui.window['_check_autoSandbox_'].update(False, visible=False)
         else:
-            if (ext_module['onoff'] == 'on'):
+            if (addin_module['onoff'] == 'on'):
                 gui.window['_check_autoSandbox_'].update(True)
             else:
                 gui.window['_check_autoSandbox_'].update(False)
@@ -391,18 +391,18 @@ if __name__ == '__main__':
         if (conf.stt_path != ''):
             if (os.path.isdir(conf.stt_path)):
                 gui.window['_check_fromSpeech_'].update(visible=True)
-                ext_module = addin.addin_modules.get('addin_UI_key2STT', None)
-                if (ext_module is not None):
-                    if (ext_module['onoff'] == 'on'):
+                addin_module = addin.addin_modules.get('addin_UI_key2STT', None)
+                if (addin_module is not None):
+                    if (addin_module['onoff'] == 'on'):
                         gui.window['_check_fromSpeech_'].update(True)
         if (conf.tts_path != ''):
             if (os.path.isdir(conf.tts_path)):
                 gui.window['_check_toSpeech_'].update(visible=True)
                 gui.window['-exec-toSpeech-'].update(visible=True)
                 gui.window['-proc-toSpeech-'].update(visible=True)
-                #ext_module = addin.addin_modules.get('addin_UI_TTS', None)
-                #if (ext_module is not None):
-                #    if (ext_module['onoff'] == 'on'):
+                #addin_module = addin.addin_modules.get('addin_UI_TTS', None)
+                #if (addin_module is not None):
+                #    if (addin_module['onoff'] == 'on'):
                 #        gui.window['_check_toSpeech_'].update(True)
         gui.window['-clear-'].update(visible=True)
         gui.window['-reset-'].update(visible=True)
@@ -626,16 +626,16 @@ if __name__ == '__main__':
                     if (res_value.lower()[-4:] == '.zip'):
                         if  (values['_check_autoSandbox_'] == True):
                             # 自動サンドボックス
-                            ext_module = addin.addin_modules.get('addin_autoSandbox', None)
-                            if (ext_module is not None):
+                            addin_module = addin.addin_modules.get('addin_autoSandbox', None)
+                            if (addin_module is not None):
                                 res_json = None
                                 try:
-                                    if (ext_module['onoff'] == 'on'):
+                                    if (addin_module['onoff'] == 'on'):
                                         dic = {}
                                         dic['file_path'] = res_value
                                         dic['browser'] = "yes"
                                         json_dump = json.dumps(dic, ensure_ascii=False, )
-                                        #func_proc = ext_module['func_proc']
+                                        #func_proc = addin_module['func_proc']
                                         #res_json  = func_proc(json_dump)
                                         res_json  = addin.addin_autoSandbox(json_dump)
                                 except Exception as e:
@@ -904,11 +904,11 @@ if __name__ == '__main__':
                             res_special = False
 
                             # 拡張アドイン 指示文チェック
-                            ext_module = addin.addin_modules.get('addin_directive', None)
-                            if (ext_module is not None):
+                            addin_module = addin.addin_modules.get('addin_directive', None)
+                            if (addin_module is not None):
                                 res_json = None
                                 try:
-                                    if (ext_module['onoff'] == 'on'):
+                                    if (addin_module['onoff'] == 'on'):
                                         dic = {}
                                         dic['original_text']            = text
                                         dic['openai_nick_name']         = conf.openai_nick_name
@@ -927,7 +927,7 @@ if __name__ == '__main__':
                                         dic['ollama_x_nick_name']       = bot.ollamaAPI.ollama_x_nick_name
                                         json_dump = json.dumps(dic, ensure_ascii=False, )
 
-                                        #func_proc = ext_module['func_proc']
+                                        #func_proc = addin_module['func_proc']
                                         #res_json  = func_proc(json_dump)
                                         res_json  = addin.addin_directive(json_dump)
                                 except Exception as e:
@@ -1375,9 +1375,9 @@ if __name__ == '__main__':
             elif (event == '_check_imageOCR_'):
                 refresh_flag = True
                 if (values['_check_imageOCR_'] == True):
-                    ext_module = addin.addin_modules.get('addin_ocr', None)
-                    if (ext_module is not None):
-                        if (ext_module['onoff'] != 'on'):
+                    addin_module = addin.addin_modules.get('addin_ocr', None)
+                    if (addin_module is not None):
+                        if (addin_module['onoff'] != 'on'):
                             gui.window['_check_imageOCR_'].update(False)
 
             elif (event == '_check_toGPT_'):
