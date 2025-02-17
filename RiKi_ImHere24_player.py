@@ -20,7 +20,7 @@ import shutil
 import queue
 import threading
 
-import pygame
+from playsound3 import playsound
 
 
 
@@ -34,35 +34,30 @@ qLog   = _v6__qLog.qLog_class()
 
 
 
-class _mixer:
+class _player:
 
     def __init__(self, ):
         self.runMode = 'debug'
         self.file_seq = 0
 
-
-
-        # Mixer 初期化
-        self.mixer_enable = False
-
         # Worker デーモン起動
-        self.mixer_queue = queue.Queue()
-        worker_mixer = threading.Thread(target=self.mixer_worker, args=(), daemon=True, )
-        worker_mixer.start()
+        self.player_queue = queue.Queue()
+        worker_player = threading.Thread(target=self.player_worker, args=(), daemon=True, )
+        worker_player.start()
 
 
 
     # Worker デーモン
-    def mixer_worker(self, ):
+    def player_worker(self, ):
         while True:
-            if (self.mixer_queue.qsize() >= 1):
-                p = self.mixer_queue.get()
-                self.mixer_queue.task_done()
+            if (self.player_queue.qsize() >= 1):
+                p = self.player_queue.get()
+                self.player_queue.task_done()
                 if (p is not None):
                     try:
                         p.start()
                         # ダミー１つ追加
-                        self.mixer_queue.put(None)
+                        self.player_queue.put(None)
                         p.join()
                     except Exception as e:
                         print(e)
@@ -75,49 +70,24 @@ class _mixer:
         if (sounds_file is None) or (not os.path.isfile(sounds_file)):
             return False
         # バッチ投入
-        play_proc = threading.Thread(target=self.play_file, args=(
+        play_proc = threading.Thread(target=self.play, args=(
                                     sounds_file,
                                     ), daemon=True, )
-        self.mixer_queue.put(play_proc)
+        self.player_queue.put(play_proc)
         return True
 
     # file再生
-    def play_file(self, sounds_file=None, ):
-        if (sounds_file is None) or (not os.path.isfile(sounds_file)):
+    def play(self, outFile='temp/_work/sound.mp3', ):
+        if (outFile is None) or (outFile == ''):
             return False
-        # Mixer 初期化
-        if (self.mixer_enable == False):
-            try:
-                pygame.mixer.init()
-                self.mixer_enable = True
-            except Exception as e:
-                print(e)
-        # file 再生
-        if (self.mixer_enable == True):
-            try:
-                #pygame.mixer.init()
-                pygame.mixer.music.load(sounds_file)
-                pygame.mixer.music.play(1)
-                return True
-            # エラー時
-            except Exception as e:
-                # Mixer 初期化（再試行）
-                self.mixer_enable = False
-                try:
-                    pygame.mixer.init()
-                    self.mixer_enable = True
-                except Exception as e:
-                    print(e)
-                # file 再生（再試行）
-                if (self.mixer_enable == True):
-                    try:
-                        #pygame.mixer.init()
-                        pygame.mixer.music.load(sounds_file)
-                        pygame.mixer.music.play(1)
-                        return True
-                    except Exception as e:
-                        print(e)
-        self.mixer_enable = False
+        if (not os.path.isfile(outFile)):
+            return False
+        try:
+            # 再生
+            playsound(sound=outFile, block=True, )
+            return True
+        except Exception as e:
+            print(e)
         return False
 
 
@@ -127,7 +97,7 @@ class _mixer:
         self.runMode   = runMode
 
         # ログ
-        self.proc_name = 'mixer'
+        self.proc_name = 'player'
         self.proc_id   = '{0:10s}'.format(self.proc_name).replace(' ', '_')
         if (not os.path.isdir(qPath_log)):
             os.makedirs(qPath_log)
@@ -142,11 +112,11 @@ class _mixer:
 
 if __name__ == '__main__':
 
-    mixer = _mixer()
+    player = _player()
 
-    mixer.init(qLog_fn='', runMode='debug',  )
+    player.init(qLog_fn='', runMode='debug',  )
 
-    mixer.batch_play(sounds_file = '_sounds/_sound_pingpong.mp3')
+    player.batch_play(sounds_file = '_sounds/_sound_pingpong.mp3')
 
     time.sleep(10.00)
 

@@ -20,7 +20,7 @@ import shutil
 import queue
 import threading
 
-import pygame
+from playsound3 import playsound
 
 import numpy as np
 import cv2
@@ -59,9 +59,6 @@ class _proc:
         self.runMode  = 'debug'
         self.file_seq = 0
 
-        # Mixer 初期化
-        self.mixer_enable     = False
-
         # Worker デーモン起動
         self.worker_queue = queue.Queue()
         worker_proc = threading.Thread(target=self.proc_worker, args=(), daemon=True, )
@@ -92,49 +89,24 @@ class _proc:
         if (sounds_file is None) or (not os.path.isfile(sounds_file)):
             return False
         # バッチ投入
-        play_proc = threading.Thread(target=self.play_file, args=(
+        play_proc = threading.Thread(target=self.play, args=(
                                     sounds_file,
                                     ), daemon=True, )
         self.worker_queue.put(play_proc)
         return True
 
     # file再生
-    def play_file(self, sounds_file=None, ):
-        if (sounds_file is None) or (not os.path.isfile(sounds_file)):
+    def play(self, outFile='temp/_work/sound.mp3', ):
+        if (outFile is None) or (outFile == ''):
             return False
-        # Mixer 初期化
-        if (self.mixer_enable == False):
-            try:
-                pygame.mixer.init()
-                self.mixer_enable = True
-            except Exception as e:
-                print(e)
-        # file 再生
-        if (self.mixer_enable == True):
-            try:
-                #pygame.mixer.init()
-                pygame.mixer.music.load(sounds_file)
-                pygame.mixer.music.play(1)
-                return True
-            # エラー時
-            except Exception as e:
-                # Mixer 初期化（再試行）
-                self.mixer_enable = False
-                try:
-                    pygame.mixer.init()
-                    self.mixer_enable = True
-                except Exception as e:
-                    print(e)
-                # file 再生（再試行）
-                if (self.mixer_enable == True):
-                    try:
-                        #pygame.mixer.init()
-                        pygame.mixer.music.load(sounds_file)
-                        pygame.mixer.music.play(1)
-                        return True
-                    except Exception as e:
-                        print(e)
-        self.mixer_enable = False
+        if (not os.path.isfile(outFile)):
+            return False
+        try:
+            # 再生
+            playsound(sound=outFile, block=True, )
+            return True
+        except Exception as e:
+            print(e)
         return False
 
 

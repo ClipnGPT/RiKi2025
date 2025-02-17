@@ -21,9 +21,10 @@ import queue
 import numpy as np
 import cv2
 
-#import PySimpleGUI_key
-#PySimpleGUI_License=PySimpleGUI_key.PySimpleGUI_License
-import PySimpleGUI as sg
+# dummy import (PySimpleGUIはtkinter版へ変更したため、ここでは互換用クラスのみ用意)
+# import PySimpleGUI as sg
+class sg:
+    WIN_CLOSED = "WIN_CLOSED"
 
 import random
 
@@ -49,26 +50,26 @@ qPath_work   = 'temp/_work/'
 qPath_rec    = 'temp/_recorder/'
 
 # 共通ルーチン
-import   _v6__qFunc
+import _v6__qFunc
 qFunc  = _v6__qFunc.qFunc_class()
-import   _v6__qGUI
+import _v6__qGUI
 qGUI   = _v6__qGUI.qGUI_class()
-import   _v6__qLog
+import _v6__qLog
 qLog   = _v6__qLog.qLog_class()
 
-import   _v6__qFFmpeg
+import _v6__qFFmpeg
 qFFmpeg= _v6__qFFmpeg.qFFmpeg_class()
 
 # 処理ルーチン
-import      RiKi_ImHere24_conf
+import RiKi_ImHere24_conf
 conf      = RiKi_ImHere24_conf._conf()
-import      RiKi_ImHere24_gui
-gui       = RiKi_ImHere24_gui._gui()
-import      RiKi_ImHere24_proc
+import test_ImHere24_2_gui
+gui       = test_ImHere24_2_gui._gui()
+import RiKi_ImHere24_proc
 proc      = RiKi_ImHere24_proc._proc()
-import      RiKi_ImHere24_player
+import RiKi_ImHere24_player
 player    = RiKi_ImHere24_player._player()
-import      RiKi_ImHere24_camera
+import RiKi_ImHere24_camera
 #camera   = RiKi_ImHere24_camera._camera()
 
 # シグナル処理
@@ -80,8 +81,6 @@ def signal_handler(signal_number, stack_frame):
 signal.signal(signal.SIGINT,  signal.SIG_IGN)
 signal.signal(signal.SIGTERM, signal.SIG_IGN)
 
-
-
 #runMode   = 'debug'
 #runMode   = 'reception'
 runMode   = 'personal'
@@ -90,8 +89,6 @@ runMode   = 'personal'
 p_screen  = 'auto'
 p_panel   = 'auto'
 p_camScan = ''
-
-
 
 if __name__ == '__main__':
     main_name = 'imhere'
@@ -135,8 +132,6 @@ if __name__ == '__main__':
         qLog.log('info', main_id, 'screen  = ' + str(p_screen))
         qLog.log('info', main_id, 'panel   = ' + str(p_panel ))
         qLog.log('info', main_id, 'camScan = ' + str(p_camScan ))
-
-
 
     # 初期設定
     if (True):
@@ -195,8 +190,6 @@ if __name__ == '__main__':
         dev_lastCheck = time.time()
         dev_setting   = True
 
-
-
     # 起動
     if (True):
         qLog.log('info', main_id, 'start')
@@ -224,8 +217,6 @@ if __name__ == '__main__':
         if (filename != ''):
             if (qFunc.statusCheck(filename) == True):
                 qFunc.statusSet(filename, False)
-
-
 
     # 待機ループ
     break_flag = False
@@ -597,7 +588,7 @@ if __name__ == '__main__':
                     if (event == '-timeout-'):
                         pass
                     else:
-                        print(event, values, )        
+                        print(event, values)        
 
             # -----------------------
             # ImHere ?
@@ -771,8 +762,6 @@ if __name__ == '__main__':
         except Exception as e:
             print(e)
             time.sleep(5.00)
-
-
 
     # 終了処理
     if (True):

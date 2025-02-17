@@ -16,7 +16,7 @@ import datetime
 import codecs
 import glob
 
-import pygame
+from playsound3 import playsound
 
 import io
 if (os.name == 'nt'):
@@ -57,13 +57,6 @@ class _func:
         self.feedback_sound_ng_file     = '_sounds/_sound_ng.mp3'
 
         self.tts_file_seq               = 0
-
-        self.mixer_enable               = False
-        try:
-            pygame.mixer.init()
-            self.mixer_enable           = True
-        except Exception as e:
-            print(e)
 
     def init(self, qLog_fn='', runMode='debug', conf=None, ):
 
@@ -215,13 +208,11 @@ class _func:
             if (self.feedback_sound.lower() != 'no'):
                 if (self.feedback_sound_accept_file != ''):
                     if (os.path.isfile(self.feedback_sound_accept_file)):
-                        if (self.mixer_enable == True):
-                            try:
-                                #pygame.mixer.init()
-                                pygame.mixer.music.load(self.feedback_sound_accept_file)
-                                pygame.mixer.music.play(1)
-                            except Exception as e:
-                                print(e)
+                        try:
+                            # 再生
+                            playsound(sound=self.feedback_sound_accept_file, block=False, )
+                        except Exception as e:
+                            print(e)
         
         elif (mode == 'ok'):
             if (str(self.feedback_popup).lower() == 'no'):
@@ -234,13 +225,11 @@ class _func:
                 if (self.feedback_sound.lower() != 'no'):
                     if (self.feedback_sound_ok_file != ''):
                         if (os.path.isfile(self.feedback_sound_ok_file)):
-                            if (self.mixer_enable == True):
-                                try:
-                                    #pygame.mixer.init()
-                                    pygame.mixer.music.load(self.feedback_sound_ok_file)
-                                    pygame.mixer.music.play(1)
-                                except Exception as e:
-                                    print(e)
+                            try:
+                                # 再生
+                                playsound(sound=self.feedback_sound_ok_file, block=False, )
+                            except Exception as e:
+                                print(e)
 
         else: # ng
             if (str(self.feedback_popup).lower() == 'no'):
@@ -252,13 +241,11 @@ class _func:
                 if (self.feedback_sound.lower() != 'no'):
                     if (self.feedback_sound_ng_file != ''):
                         if (os.path.isfile(self.feedback_sound_ng_file)):
-                            if (self.mixer_enable == True):
-                                try:
-                                    #pygame.mixer.init()
-                                    pygame.mixer.music.load(self.feedback_sound_ng_file)
-                                    pygame.mixer.music.play(1)
-                                except Exception as e:
-                                    print(e)
+                            try:
+                                # 再生
+                                playsound(sound=self.feedback_sound_ng_file, block=False, )
+                            except Exception as e:
+                                print(e)
                 if (self.feedback_key != ''):
                     try:
                         time.sleep(0.50)
