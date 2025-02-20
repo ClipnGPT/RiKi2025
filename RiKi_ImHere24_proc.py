@@ -17,10 +17,10 @@ import codecs
 import glob
 import shutil
 
-from pynput import keyboard
-
 import numpy as np
 import cv2
+
+import keyboard
 
 
 
@@ -57,13 +57,23 @@ class _proc:
         self.runMode   = 'debug'
 
         # キーボード監視 開始
-        self.kb_count = 0
-        self.kb_listener = keyboard.Listener(on_press=self.kb_press)
-        self.kb_listener.start()
+        self.last_key_time = 0
+        self.start_kb_listener()
 
-    # キーボードイベント
-    def kb_press(self, key):
-        self.kb_count += 1
+    # キーボード監視 開始
+    def start_kb_listener(self, runMode='assistant',):
+        # イベントハンドラの登録
+        self.last_key_time = 0
+        keyboard.hook(self._keyboard_event_handler)
+    # イベントハンドラ
+    def _keyboard_event_handler(self, event):
+        self.last_key_time = time.time()
+    # キーボード監視 終了
+    def stop_kb_listener(self):
+        try:
+            keyboard.unhook_all()
+        except Exception as e:
+            print(e)
 
     def init(self, qLog_fn='', runMode='debug', conf=None, ):
 

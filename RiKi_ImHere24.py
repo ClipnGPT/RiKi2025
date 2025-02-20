@@ -210,7 +210,7 @@ if __name__ == '__main__':
     
         last_action_mouse = time.time()
         (last_x, last_y)  = qGUI.position()
-        last_kb_count     = proc.kb_count
+        last_key_time     = proc.last_key_time
         last_action_key   = time.time()
 
         last_sound_play   = time.time() - 60
@@ -270,14 +270,13 @@ if __name__ == '__main__':
             # キーボード確認
             # -----------------------
             if (conf.keyboard_check != 'no') and (conf.keyboard_check != 'off'):
-                kb_count = proc.kb_count
-                if (kb_count != last_kb_count):
+                if (proc.last_key_time != last_key_time):
                     if (new_ImHere == False) and (ImHere_hit == ''):
                         ImHere_hit = 'keyboard'
                         qLog.log('debug', main_id, 'ImHere! (keyboaed)')
                     else:
                         ImHere_hit = 'keyboard'
-                last_kb_count = kb_count
+                last_key_time = proc.last_key_time
 
             # -----------------------
             # アクション
@@ -321,7 +320,7 @@ if __name__ == '__main__':
                             qLog.log('info', main_id, 'Idol Key Action,   Press = "' + conf.action60s_key + '"', )
                             try:
                                 qGUI.press(conf.action60s_key)
-                                last_kb_count = proc.kb_count
+                                last_key_time = proc.last_key_time
                             except Exception as e:
                                 pass
 

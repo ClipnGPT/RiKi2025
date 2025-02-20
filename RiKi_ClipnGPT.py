@@ -42,8 +42,10 @@ requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.
 # Dummy import
 # ------------
 #import pip
+import keyboard
+import mouse
+import screeninfo
 from playsound3 import playsound
-import pynput
 import pandas
 import openpyxl
 import pyodbc
