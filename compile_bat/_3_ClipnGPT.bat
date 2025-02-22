@@ -149,6 +149,10 @@ IF EXIST "C:\_共有\Worker\temp"                RD "C:\_共有\Worker\temp"        
 IF EXIST "C:\_共有\Worker\_cache"              RD "C:\_共有\Worker\_cache"              /s /q
 IF EXIST "C:\_共有\Monjyu\temp"                RD "C:\_共有\Monjyu\temp"                /s /q
 IF EXIST "C:\_共有\Monjyu\_cache"              RD "C:\_共有\Monjyu\_cache"              /s /q
+
+ECHO; uninstall
+python -m pip uninstall pysimplegui -y
+
 PAUSE
 
 

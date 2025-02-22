@@ -16,12 +16,6 @@ import datetime
 import codecs
 import glob
 
-import queue
-
-#import PySimpleGUI_key
-#PySimpleGUI_License=PySimpleGUI_key.PySimpleGUI_License
-import PySimpleGUI as sg
-
 # dummy import
 if (os.name == 'nt'):
     import comtypes.client
@@ -166,9 +160,6 @@ if __name__ == '__main__':
         #icon  = None
         icon   = './_icons/' + titlex + '.ico'
 
-        # GUI 専用キュー
-        gui_queue = queue.Queue()
-
         # proc 初期化
         proc.init(qLog_fn=qLog_fn, runMode=runMode, conf=conf, )
 
@@ -255,7 +246,6 @@ if __name__ == '__main__':
                     title=title, theme=conf.gui_theme,
                     keep_on_top=conf.gui_keep_on_top, alpha_channel=conf.gui_alpha,
                     icon=icon, )
-            gui.bind()
             reset_flag = True
 
         # GUI リセット
@@ -291,7 +281,7 @@ if __name__ == '__main__':
         event, values = gui.read(timeout=250, timeout_key='-idoling-')
 
         # GUI 終了イベント処理
-        if event == sg.WIN_CLOSED:
+        if event == "WIN_CLOSED":
             gui.window = None
             break_flag = True
             break
@@ -300,107 +290,88 @@ if __name__ == '__main__':
             break
 
         try:
-            # ------------------------------
-            # アイドリング時の処理
-            # ------------------------------
-            if (event == '-idoling-'):
+            if (gui.window is not None):
+                # ------------------------------
+                # アイドリング時の処理
+                # ------------------------------
+                if (event == '-idoling-'):
 
-                # サイズ変更対応
-                #w, h = gui.window.size
-                #sg_width  = w
-                #sg_height = h
-
-                # 位置変更対応
-                #sg_left2  = 0
-                #sg_top2   = 0
-                #l, t, r, b = qGUI.getWindowRect(winTitle=title,)
-                #if (l is not None):
-                #    sg_left  = l
-                #    sg_top   = t
-                #    sg_left2 = l
-                #    sg_top2  = t
-                #    if (gui.no_titlebar == False):
-                #        sg_left2 = l + 10
-                #        sg_top2  = t + 32
-
-                # ウィンドウ位置、大きさ
-                (sg_left, sg_top) = gui.window.current_location()
-                (sg_width, sg_height) = gui.window.size
-                sg_left2 = sg_left
-                sg_top2  = sg_top
-                if (gui.no_titlebar == False):
-                    sg_left2 = sg_left + 10
-                    sg_top2  = sg_top  + 32
-
-                # 時計
-                dt_now    = datetime.datetime.now()
-                dt_YYMMDD = dt_now.strftime('%Y%m%d')
-                dt_YOUBI  = dt_now.strftime('%a')
-                dt_HHMM   = dt_now.strftime('%H%M')
-                dt_YYYYMMDDHHMM  = dt_now.strftime('%H%M')
-                s = dt_now.second
-                m = dt_now.minute
-                h = dt_now.hour
-        
-                # 時報処理
-                if (h != bk_h):
-                    bk_h=h
-
-                    proc.timeSign_info(h, m, )
-
-                # デザイン変更
-                if (m != bk_m):
-                    bk_m=m
-
-                    if (conf.clock_design == 'auto'):
-                        design = h*60+m
+                    # サイズ変更対応
+                    left = gui.window.winfo_x()
+                    top = gui.window.winfo_y()
+                    width = gui.window.winfo_width()
+                    height = gui.window.winfo_height()
+                    if (gui.no_titlebar == True):
+                        left2 = left
+                        top2  = top
                     else:
-                        try:
-                            design = int(conf.clock_design)
-                        except:
-                            design = 0
+                        left2 = left + 10
+                        top2  = top  + 32
 
-                # アナログ時計
-                if (runMode != 'digital') and (runMode != 'personal'):
-                    if (s != bk_s):
-                        bk_s=s
+                    # 時計
+                    dt_now    = datetime.datetime.now()
+                    dt_YYMMDD = dt_now.strftime('%Y%m%d')
+                    dt_YOUBI  = dt_now.strftime('%a')
+                    dt_HHMM   = dt_now.strftime('%H%M')
+                    dt_YYYYMMDDHHMM  = dt_now.strftime('%H%M')
+                    s = dt_now.second
+                    m = dt_now.minute
+                    h = dt_now.hour
+            
+                    # 時報処理
+                    if (h != bk_h):
+                        bk_h=h
 
-                        # test
-                        #ds += 1
-                        #design = ds
+                        proc.timeSign_info(h, m, )
 
-                        try:
-                            img = proc.getImage_analog(dt_now, design, eyes, sg_left2, sg_top2, sg_width, sg_height, )
+                    # デザイン変更
+                    if (m != bk_m):
+                        bk_m=m
+
+                        if (conf.clock_design == 'auto'):
+                            design = h*60+m
+                        else:
+                            try:
+                                design = int(conf.clock_design)
+                            except:
+                                design = 0
+
+                    # アナログ時計
+                    if (runMode != 'digital') and (runMode != 'personal'):
+                        if (s != bk_s):
+                            bk_s=s
+
+                            # test
+                            #ds += 1
+                            #design = ds
+
+                            img = proc.getImage_analog(dt_now, design, eyes, left2, top2, width, height, )
                             gui.setImage(image=img, refresh=True, )
-                        except Exception as e:
-                            print(e)
 
-                # デジタル時計 digital, personal
-                if (runMode == 'digital') or (runMode == 'personal'):
-        
-                        try:
-                            img = proc.getImage_digital(dt_now, design, eyes, sg_left2, sg_top2, sg_width, sg_height, )
+                    # デジタル時計 digital, personal
+                    if (runMode == 'digital') or (runMode == 'personal'):
+            
+                            img = proc.getImage_digital(dt_now, design, eyes, left2, top2, width, height, )
                             gui.setImage(image=img, refresh=True, )
-                        except Exception as e:
-                            print(e)
 
-            # 画像クリック
-            elif (event == '_output_img_'):
-                if (eyes == True):
-                    eyes = False
+                # 画像クリック
+                elif (event == '_output_img_'):
+                    if (eyes == True):
+                        eyes = False
+                    else:
+                        eyes = True
+
+                # ------------------------------
+                # ボタンイベント処理
+                # ------------------------------
+                # リセット
+                elif (event == '-reset-'):
+                    print(event, )
+                    reset_flag = True
+
                 else:
-                    eyes = True
+                    print(event, values, )
 
-            # ------------------------------
-            # ボタンイベント処理
-            # ------------------------------
-            # リセット
-            elif (event == '-reset-'):
-                print(event, )
-                reset_flag = True
-
-            else:
-                print(event, values, )
         except Exception as e:
             print(e)
             time.sleep(5.00)

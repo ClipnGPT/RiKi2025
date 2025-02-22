@@ -19,9 +19,6 @@ import glob
 import psutil
 import random
 
-import queue
-import threading
-
 import numpy as np
 import cv2
 

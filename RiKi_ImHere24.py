@@ -16,14 +16,8 @@ import datetime
 import codecs
 import glob
 
-import queue
-
 import numpy as np
 import cv2
-
-#import PySimpleGUI_key
-#PySimpleGUI_License=PySimpleGUI_key.PySimpleGUI_License
-import PySimpleGUI as sg
 
 import random
 
@@ -175,9 +169,6 @@ if __name__ == '__main__':
             title  = titlex + ' [ ' + runMode + ' ]'
         #icon  = None
         icon   = './_icons/' + titlex + '.ico'
-
-        # GUI 専用キュー
-        gui_queue = queue.Queue()
 
         # proc 初期化
         proc.init(qLog_fn=qLog_fn, runMode=runMode, conf=conf, )
@@ -448,7 +439,6 @@ if __name__ == '__main__':
                                 title=title, theme=conf.gui_theme,
                                 keep_on_top=conf.gui_keep_on_top, alpha_channel=conf.gui_alpha,
                                 icon=icon, )
-                        gui.bind()
                         gui.reset()
                         gui.resize(reset=True, )
                         gui.autoFadeControl(reset=True, )
@@ -563,7 +553,6 @@ if __name__ == '__main__':
                                 title=title, theme=conf.gui_theme,
                                 keep_on_top=conf.gui_keep_on_top, alpha_channel=conf.gui_alpha,
                                 icon=icon, )
-                        gui.bind()
                         gui.reset()
                         gui.resize(reset=True, )
                         gui.autoFadeControl(reset=True, )
@@ -583,7 +572,7 @@ if __name__ == '__main__':
                     # イベントの読み込み                ↓　timeout値でtime.sleep代用
                     event, values = gui.read(timeout=150, )
                     # ウィンドウの×ボタンクリックで終了
-                    if event == sg.WIN_CLOSED:
+                    if event == "WIN_CLOSED":
                         #break_flag = True
                         #break
                         pass
@@ -593,7 +582,7 @@ if __name__ == '__main__':
                         #break
                         pass
 
-                    if (event == '-timeout-'):
+                    if (event == '-idoling-'):
                         pass
                     else:
                         print(event, values, )        

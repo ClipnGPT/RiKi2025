@@ -58,22 +58,17 @@ class _proc:
 
         # キーボード監視 開始
         self.last_key_time = 0
+        self.kb_handler_id = None
         self.start_kb_listener()
 
     # キーボード監視 開始
     def start_kb_listener(self, runMode='assistant',):
         # イベントハンドラの登録
         self.last_key_time = 0
-        keyboard.hook(self._keyboard_event_handler)
+        self.kb_handler_id = keyboard.hook(self._keyboard_event_handler)
     # イベントハンドラ
     def _keyboard_event_handler(self, event):
         self.last_key_time = time.time()
-    # キーボード監視 終了
-    def stop_kb_listener(self):
-        try:
-            keyboard.unhook_all()
-        except Exception as e:
-            print(e)
 
     def init(self, qLog_fn='', runMode='debug', conf=None, ):
 
