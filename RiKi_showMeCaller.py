@@ -26,11 +26,18 @@ if (os.name == 'nt'):
 
 
 
+# パス設定
+qPath_base = os.path.dirname(sys.argv[0]) + '/'
+if (qPath_base == '/'):
+    qPath_base = os.getcwd() + '/'
+else:
+    os.chdir(qPath_base)
+
 # インターフェース
-qCtrl_control_player     = 'temp/control_player.txt'
-qCtrl_control_self       = qCtrl_control_player
-
-
+qPath_temp  = 'temp/'
+qPath_log   = 'temp/_log/'
+qCtrl_control_player = 'temp/control_player.txt'
+qCtrl_control_self   = qCtrl_control_player
 
 # 共通ルーチン
 import    _v6__qFunc
@@ -39,13 +46,6 @@ import    _v6__qGUI
 qGUI    = _v6__qGUI.qGUI_class()
 import    _v6__qLog
 qLog    = _v6__qLog.qLog_class()
-
-
-
-qPath_temp  = 'temp/'
-qPath_log   = 'temp/_log/'
-
-
 
 # シグナル処理
 import signal

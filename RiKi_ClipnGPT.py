@@ -43,7 +43,6 @@ requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.
 # ------------
 #import pip
 import keyboard
-import mouse
 import screeninfo
 from playsound3 import playsound
 import pandas
@@ -101,6 +100,8 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
+
+
 
 # パス設定
 qPath_base = os.path.dirname(sys.argv[0]) + '/'

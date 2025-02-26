@@ -27,6 +27,8 @@ if (os.name == 'nt'):
     import comtypes.client
     import comtypes.stream
 
+
+
 # パス設定
 qPath_base = os.path.dirname(sys.argv[0]) + '/'
 if (qPath_base == '/'):
@@ -53,7 +55,6 @@ qLog    = _v6__qLog.qLog_class()
 import   _v6__qFFmpeg
 qFFmpeg= _v6__qFFmpeg.qFFmpeg_class()
 qCV2   = _v6__qFFmpeg.qCV2_class()
-
 
 # 処理ルーチン
 import      RiKi_showMeVideo24_conf

@@ -25,9 +25,6 @@ from PIL import Image, ImageTk
 import numpy as np
 import cv2
 
-import platform
-qPLATFORM = platform.system().lower() #windows,darwin,linux
-
 # インターフェース
 qPath_temp   = 'temp/'
 qPath_log    = 'temp/_log/'
@@ -163,15 +160,16 @@ class _gui:
             self.terminate()
         try:
             self.window = tk.Tk()
+            self.window.attributes("-alpha", 0)
+            self.window.update_idletasks()
             self.window.title(self.title)
 
             if icon is not None and os.path.isfile(icon):
                 self.window.iconbitmap(icon)
 
-            geometry_str = f"{self.width}x{self.height}+{self.left}+{self.top}"
+            geometry_str = f"{self.width}x{self.height}{self.left :+}{self.top :+}"
             self.window.geometry(geometry_str)
             self.window.wm_attributes("-topmost", True if keep_on_top != 'no' else False)
-            self.window.attributes("-alpha", self.alpha_channel)
             self.window.resizable(self.resizable, self.resizable)
             if self.no_titlebar:
                 self.window.overrideredirect(True)
@@ -181,6 +179,8 @@ class _gui:
             self.window.protocol("WM_DELETE_WINDOW", self.on_close)
             self.default_img = np.zeros((self.height, self.width, 3), np.uint8)
             cv2.rectangle(self.default_img, (0, 0), (self.width, self.height), (255, 0, 0), -1)
+            self.window.geometry(geometry_str)
+            self.window.attributes("-alpha", self.alpha_channel)
             self.reset()
         except Exception as e:
             print(e)
@@ -290,8 +290,12 @@ class _gui:
 
     # GUI 画面更新
     def refresh(self):
-        self.window.update_idletasks()
-        return True
+        try:
+            self.window.update_idletasks()
+            return True
+        except Exception as e:
+            print(e)
+        return False    
 
     # 画像セット
     def setImage(self, image=None, refresh=True, ):
@@ -305,13 +309,18 @@ class _gui:
             img = np.zeros((h, w, 3), np.uint8)
         else:
             img = cv2.resize(image, (w, h))
-        img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        im = Image.fromarray(img_rgb)
-        self.tk_image = ImageTk.PhotoImage(im)
-        self.image_label.config(image=self.tk_image)
-        if refresh:
-            self.refresh()
-        return True
+
+        try:
+            img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+            im = Image.fromarray(img_rgb)
+            self.tk_image = ImageTk.PhotoImage(im)
+            self.image_label.config(image=self.tk_image)
+            if refresh:
+                self.refresh()
+            return True
+        except Exception as e:
+            print(e)
+        return False
 
     # GUI 自動フェード
     def autoFadeControl(self, reset=False, intervalSec=60, fadeSec=10, ):

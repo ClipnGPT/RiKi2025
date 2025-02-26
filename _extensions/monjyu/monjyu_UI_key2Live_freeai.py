@@ -36,7 +36,6 @@ from PIL import Image, ImageGrab, ImageTk
 import io
 import screeninfo
 import pyautogui
-import mouse
 import cv2
 import hashlib
 
@@ -373,14 +372,14 @@ class _live_api_freeai:
 
             # ストリーム設定
             audio_stream = pyaudio.PyAudio()
-            mic_info = audio_stream.get_default_input_device_info()
+            #mic_info = audio_stream.get_default_input_device_info()
             input_stream = await asyncio.to_thread(
                 audio_stream.open,
                 format=FORMAT,
                 channels=CHANNELS,
                 rate=INPUT_RATE,
                 input=True,
-                input_device_index=mic_info["index"],
+                #input_device_index=mic_info["index"],
                 frames_per_buffer=INPUT_CHUNK,
             )
 
@@ -1155,7 +1154,7 @@ class _imageShot_class:
                     max_buttom = (s.y+s.height)
 
             # マウス配置
-            (mouse_x,mouse_y) = mouse.get_position()
+            (mouse_x,mouse_y) = pyautogui.position()
 
             # 画像切り出し
             screen = -1

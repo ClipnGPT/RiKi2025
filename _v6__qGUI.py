@@ -16,13 +16,13 @@ import time
 import screeninfo
 import pyautogui
 if (os.name == 'nt'):
+    import platform
     import ctypes
     from ctypes import wintypes
     #import win32con
     import comtypes.client
 
 import array
-import platform
 import pyperclip
 
 
@@ -626,14 +626,15 @@ class qGUI_class:
     def notePad(self, txt='', cr=True, lf=False):
         if (os.name != 'nt'):
             return False
-        version = platform.release()
-        if version == '10':
-            return self.notePad10(txt, cr, lf)
-        elif version == '11':
-            return self.notePad11(txt, cr, lf)
         else:
-            #print(f"Unsupported Windows version: {version}")
-            return False
+            version = platform.release()
+            if version == '10':
+                return self.notePad10(txt, cr, lf)
+            elif version == '11':
+                return self.notePad11(txt, cr, lf)
+            else:
+                #print(f"Unsupported Windows version: {version}")
+                return False
 
 
 

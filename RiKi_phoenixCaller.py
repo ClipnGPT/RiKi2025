@@ -21,24 +21,24 @@ import subprocess
 
 
 
+# パス設定
+qPath_base = os.path.dirname(sys.argv[0]) + '/'
+if (qPath_base == '/'):
+    qPath_base = os.getcwd() + '/'
+else:
+    os.chdir(qPath_base)
+
 # インターフェース
-qCtrl_control_kernel     = 'temp/control_kernel.txt'
-qCtrl_control_self       = qCtrl_control_kernel
-
-
+qPath_temp  = 'temp/'
+qPath_log   = 'temp/_log/'
+qCtrl_control_kernel = 'temp/control_kernel.txt'
+qCtrl_control_self   = qCtrl_control_kernel
 
 # 共通ルーチン
 import    _v6__qFunc
 qFunc   = _v6__qFunc.qFunc_class()
 import    _v6__qLog
 qLog    = _v6__qLog.qLog_class()
-
-
-
-qPath_temp  = 'temp/'
-qPath_log   = 'temp/_log/'
-
-
 
 # シグナル処理
 import signal

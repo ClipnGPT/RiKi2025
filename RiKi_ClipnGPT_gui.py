@@ -28,9 +28,6 @@ import cv2
 
 from io import BytesIO
 
-import platform
-qPLATFORM = platform.system().lower() #windows,darwin,linux
-
 # インターフェース
 qPath_temp   = 'temp/'
 qPath_log    = 'temp/_log/'
@@ -156,7 +153,7 @@ class _gui:
         # ウィンドウ設定
         self.close()
         try:
-            if (qPLATFORM == 'darwin'):
+            if (sys.platform == 'darwin'): # MacOS チャック
                 self.no_titlebar = False
             if (self.no_titlebar == True):
                 self.window = sg.Window(self.title, self.layout,

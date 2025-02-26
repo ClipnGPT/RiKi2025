@@ -21,6 +21,8 @@ if (os.name == 'nt'):
     import comtypes.client
     import comtypes.stream
 
+
+
 # パス設定
 qPath_base = os.path.dirname(sys.argv[0]) + '/'
 if (qPath_base == '/'):

@@ -10,6 +10,7 @@
 
 
 
+import sys
 import os
 import time
 
@@ -23,9 +24,6 @@ import cv2
 #    from ultralytics import YOLO
 #except Exception as e:
 #    print(e)
-
-import platform
-qPLATFORM = platform.system().lower() #windows,darwin,linux
 
 
 
@@ -1024,7 +1022,7 @@ class qFFmpeg_class:
                 ffmpeg.terminate()
                 ffmpeg = None
 
-        elif (qPLATFORM == 'darwin'):
+        elif (sys.platform == 'darwin'): # MacOS チェック
 
             ffmpeg = subprocess.Popen(['ffmpeg', '-y',
 	            '-threads', '2',

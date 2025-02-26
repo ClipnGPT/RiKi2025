@@ -22,6 +22,13 @@ if (os.name == 'nt'):
 
 
 
+# パス設定
+qPath_base = os.path.dirname(sys.argv[0]) + '/'
+if (qPath_base == '/'):
+    qPath_base = os.getcwd() + '/'
+else:
+    os.chdir(qPath_base)
+
 # 共通ルーチン
 import  _v6__qFunc
 qFunc = _v6__qFunc.qFunc_class()
@@ -29,6 +36,15 @@ import  _v6__qGUI
 qGUI  = _v6__qGUI.qGUI_class()
 import  _v6__qLog
 qLog  = _v6__qLog.qLog_class()
+
+# シグナル処理
+import signal
+def signal_handler(signal_number, stack_frame):
+    print(os.path.basename(__file__), 'accept signal =', signal_number)
+
+#signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGINT,  signal.SIG_IGN)
+signal.signal(signal.SIGTERM, signal.SIG_IGN)
 
 
 
